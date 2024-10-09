@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-Grupo5Application<grupo5>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "br.com.grupo5.grupo5.Grupo5Application",
+      "projectName": "grupo5",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
