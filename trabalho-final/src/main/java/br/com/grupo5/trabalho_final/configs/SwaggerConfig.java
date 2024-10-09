@@ -17,7 +17,7 @@ import io.swagger.v3.oas.models.servers.Server;
 @SecurityScheme(name = "bearer Auth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
 public class SwaggerConfig {
 
-	@Value("${prop.swagger.enabled}")
+	@Value("${prop.swagger.dev-url}")
 	private String devUrl;
 
 	@Bean
