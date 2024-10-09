@@ -1,10 +1,10 @@
-package br.com.grupo5.grupo5;
+package br.com.grupo5.trabalho_final;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Grupo5ApplicationTests {
+class TrabalhoFinalApplicationTests {
 
 	@Test
 	void contextLoads() {
