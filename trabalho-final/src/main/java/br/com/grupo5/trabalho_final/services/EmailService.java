@@ -9,8 +9,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 //import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 
 //import jakarta.mail.MessagingException;
 //import jakarta.mail.internet.MimeMessage;
@@ -64,4 +68,26 @@ public class EmailService {
 		}
 	}
 
+	public String writerTeste2() {
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter dateForm = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message,true);
+            helper.setSubject("Teste email2");
+            helper.setTo("fredcostafernandes@gmail.com");
+
+            String emailText = "<h1>Teste</h1>"
+                                + "<p>Olá</p>"
+                                + "<p>Você está recebendo esse email: "+dateTime.format(dateForm)+"</p>"
+                                        + "<br>";
+            helper.setText(emailText,true);
+            javaMailSender.send(message);
+            return "Email enviado com sucesso";
+        } catch (MessagingException e) {
+            return "erro ao enviar o email" + e.getMessage();
+        }
+    }
 }

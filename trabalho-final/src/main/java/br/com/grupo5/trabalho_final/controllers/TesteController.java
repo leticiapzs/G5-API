@@ -21,4 +21,9 @@ public class TesteController {
 		return "Email enviado com sucesso!";
 	}
 
+	@GetMapping("/envio email")
+    public String email2() {
+        emailService.writerTeste2();
+        return "Email(2) Enviado com Sucesso";
+    }
 }
