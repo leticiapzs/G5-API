@@ -12,9 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDetailsImpl implements UserDetails {
-	//static-> pode ser utilizado sem instância, pode ser utilizado em qualquer classe desde que seja estática 
-	//final-> indica que é uma constante
-	//serialVersionUID-> indica uma serialização que indica que aquele objeto foi construído
+
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -23,13 +21,11 @@ public class UserDetailsImpl implements UserDetails {
 
 	private String email;
 
-	@JsonIgnore //ignora o formato Json
+	@JsonIgnore
 	private String password;
 
-	//cria uma variável que pode armazenar uma coleção de objetos de qualquer tipo
 	private Collection<? extends GrantedAuthority> authorities;
 
-	//Construtor parametrizado
 	public UserDetailsImpl(Integer id, String username, String email, String password,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
@@ -39,21 +35,15 @@ public class UserDetailsImpl implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	//utiliza um método estático para construir o usuário
 	public static UserDetailsImpl build(User user) {
-		//GrantedAuthority-> representa uma autorização concedida ao user
-		//cria uma lista do tipo GrantedAuthority que recebe as permissões do usuário
-		//stream().map()-> para percorrer a lista de roles 
-		//SimpleGrantedAuthority()-> armazenar o GrantedAuthority como uma String e associa ao usuário 
+
 		List<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName()
 						.name())).collect(Collectors.toList());
 
-		//retorna o objeto construído a partir da lista acima
 		return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), authorities);
 	}
 
-	//Getters e Setters-booleanos
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
@@ -98,7 +88,6 @@ public class UserDetailsImpl implements UserDetails {
 	}
 
 	@Override
-	//compara se o objeto recebido possui o mesmo id retornando true em caso positivo e false em caso de null
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;

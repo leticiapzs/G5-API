@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository("role")
 public interface RoleRepository extends JpaRepository<Role, Integer> {
-	//findByName(RoleEnum name)-> busca pelo nome, porém só aceita se existir no enum RoleEnum
+
 	Optional<Role> findByName(RoleEnum name);
 }
