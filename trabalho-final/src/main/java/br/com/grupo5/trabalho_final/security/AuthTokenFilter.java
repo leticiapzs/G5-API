@@ -2,11 +2,6 @@ package br.com.grupo5.trabalho_final.security;
 
 import java.io.IOException;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +12,12 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import br.com.api.teste.security.jwt.JwtUtils;
-import br.com.api.teste.security.services.UserDetailsServiceImpl;
+import br.com.grupo5.trabalho_final.security.jwt.JwtUtils;
+import br.com.grupo5.trabalho_final.security.services.UserDetailsServiceImpl;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class AuthTokenFilter extends OncePerRequestFilter {
 	@Autowired

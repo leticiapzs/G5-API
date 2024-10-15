@@ -18,6 +18,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.grupo5.trabalho_final.security.dto.JwtResponseDTO;
+import br.com.grupo5.trabalho_final.security.dto.LoginRequestDTO;
+import br.com.grupo5.trabalho_final.security.dto.MessageResponseDTO;
+import br.com.grupo5.trabalho_final.security.dto.SignupRequestDTO;
+import br.com.grupo5.trabalho_final.security.entities.Role;
+import br.com.grupo5.trabalho_final.security.entities.User;
+import br.com.grupo5.trabalho_final.security.enums.RoleEnum;
+import br.com.grupo5.trabalho_final.security.jwt.JwtUtils;
+import br.com.grupo5.trabalho_final.security.repositories.RoleRepository;
+import br.com.grupo5.trabalho_final.security.repositories.UserRepository;
+import br.com.grupo5.trabalho_final.security.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)

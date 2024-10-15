@@ -55,4 +55,4 @@ public class SignupRequestDTO {
 		this.role = role;
 	}
 }
-}
+

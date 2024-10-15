@@ -21,7 +21,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import br.com.api.teste.security.services.UserDetailsServiceImpl;
+import br.com.grupo5.trabalho_final.security.services.UserDetailsServiceImpl;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
