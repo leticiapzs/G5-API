@@ -1,4 +1,4 @@
-package br.com.grupo5.trabalho_final.controllers;
+package br.com.grupo5.trabalho_final.security.controllers;
 
 import java.util.HashSet;
 import java.util.List;
