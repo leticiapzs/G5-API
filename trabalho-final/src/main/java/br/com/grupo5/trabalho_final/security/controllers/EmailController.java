@@ -1,11 +1,11 @@
-package br.com.grupo5.trabalho_final.controllers;
+package br.com.grupo5.trabalho_final.security.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.grupo5.trabalho_final.services.EmailService;
+import br.com.grupo5.trabalho_final.security.services.EmailService;
 
 @RestController
 @RequestMapping("/email")
