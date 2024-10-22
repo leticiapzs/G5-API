@@ -10,10 +10,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-// import jakarta.persistence.JoinColumn;
-// import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "pedido")
@@ -23,7 +24,8 @@ public class Pedido {
   @Column(name = "ped_cd_id")
   private Integer id;
 
-  // inserir data e valor total
+  @Column(name = "date")
+  private Date date;
 
   public Pedido() {
   }
@@ -36,6 +38,19 @@ public class Pedido {
     this.id = id;
   }
 
+  public Date getDate() {
+    return date;
+  }
+
+  public void setDate(Date date) {
+    this.date = date;
+  }
+
+  @PrePersist
+  protected void onCreate() {
+    this.date = new Date();
+  }
+
   @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY)
   private Set<PedidoProduto> pedidoProdutos;
 
@@ -45,7 +60,7 @@ public class Pedido {
 
   @Override
   public String toString() {
-    return "Pedido [id=" + id + "]";
+    return "Pedido [id=" + id + ", date=" + date + "]";
   }
 
 }
