@@ -17,12 +17,25 @@ public class EnderecoService {
 	@Autowired
 	Util util;
 	
+
 	@Autowired
 	EnderecoRepository enderecoRepository;
 	
 	public EnderecoResponseDTO consultarEndereco(EnderecoRequestDTO enderecoDto) {
 		EnderecoResponseDTO viaCep = util.buscarEndereco(enderecoDto.getCep());
+
+	public EnderecoResponseDTO cadastrarEndereco(EnderecoRequestDTO enderecoDto) {
+		Endereco endereco = criarEndereco(enderecoDto);
+		EnderecoResponseDTO endDTO = new EnderecoResponseDTO(endereco);
+		enderecoRepository.save(endereco);
+
+		return endDTO;
+	}
+
+	public Endereco criarEndereco(EnderecoRequestDTO enderecoDto) {
 		
+		EnderecoResponseDTO viaCep = util.buscarEndereco(enderecoDto.getCep());
+
 		EnderecoResponseDTO endereco = new EnderecoResponseDTO();
 		endereco.setCep(viaCep.getCep());
 		endereco.setLogradouro(viaCep.getLogradouro());
@@ -33,14 +46,24 @@ public class EnderecoService {
         endereco.setUf(viaCep.getUf());
         endereco.setEstado(viaCep.getEstado());
 		
+		endereco.setNumero(enderecoDto.getNumero());
+		endereco.setComplemento(enderecoDto.getComplemento());
+		endereco.setBairro(viaCep.getBairro());
+		endereco.setLocalidade(viaCep.getLocalidade());
+		endereco.setUf(viaCep.getUf());
+		endereco.setEstado(viaCep.getEstado());
+
 		Endereco enderecoConvertido = endereco.toEndereco();
 		enderecoRepository.save(enderecoConvertido);
 		
 		return endereco;
+		return enderecoConvertido;
 	}
 	
+
 	public EnderecoResponseDTO buscarEndereco(Integer id) {
 		Optional <Endereco> endereco = enderecoRepository.findById(id);
+		Optional<Endereco> endereco = enderecoRepository.findById(id);
 		EnderecoResponseDTO enderecoResponseDTO = new EnderecoResponseDTO();
 		enderecoResponseDTO.setCep(endereco.get().getCep());
 		enderecoResponseDTO.setLogradouro(endereco.get().getLogradouro());
@@ -51,11 +74,14 @@ public class EnderecoService {
 		enderecoResponseDTO.setUf(endereco.get().getUf());
 		enderecoResponseDTO.setEstado(endereco.get().getEstado());
 		
+
 		return enderecoResponseDTO;
 	}
 	
+
 	public boolean enderecoDelete(Integer id) {
 		if(enderecoRepository.existsById(id)) {
+		if (enderecoRepository.existsById(id)) {
 			enderecoRepository.deleteById(id);
 			return true;
 		} else {

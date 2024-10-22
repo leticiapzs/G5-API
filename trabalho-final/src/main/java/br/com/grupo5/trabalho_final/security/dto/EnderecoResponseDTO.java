@@ -81,6 +81,18 @@ public class EnderecoResponseDTO {
         return new Endereco(this.cep, this.logradouro, this.numero, this.complemento, this.bairro, this.localidade, this.uf, this.estado);
     }
 	
+	public EnderecoResponseDTO (Endereco endereco) {
+		this.cep = endereco.getCep();
+		this.bairro = endereco.getBairro();
+		this.complemento = endereco.getComplemento();
+		this.estado = endereco.getEstado();
+		this.localidade = endereco.getLocalidade();
+		this.logradouro = endereco.getLogradouro();
+		this.uf = endereco.getUf();
+	}
+	
+	public EnderecoResponseDTO () {
+	}
 	
 }
 
