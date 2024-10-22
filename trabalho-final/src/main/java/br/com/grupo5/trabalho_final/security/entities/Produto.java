@@ -3,11 +3,11 @@ package br.com.grupo5.trabalho_final.security.entities;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinTable;
@@ -20,20 +20,20 @@ import java.util.Set;
 public class Produto {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "prod_cd_id")
   private Integer id;
 
   @NotBlank
-  @Size(max = 20)
+  @Column(name = "prod_tx_nome")
   private String nome;
 
   @NotBlank
-  @Size(max = 50)
-  @Email
+  @Column(name = "prod_tx_descricao")
   private String descricao;
 
   @NotBlank
-  @Size(max = 120)
-  private String estoque;
+  @Column(name = "prod_int_estoque")
+  private Integer estoque;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "pedido_id"))
@@ -42,7 +42,7 @@ public class Produto {
   public Produto() {
   }
 
-  public Produto(Integer id, String nome, String descricao, String estoque) {
+  public Produto(Integer id, String nome, String descricao, Integer estoque) {
     this.id = id;
     this.nome = nome;
     this.descricao = descricao;
@@ -73,11 +73,11 @@ public class Produto {
     this.descricao = descricao;
   }
 
-  public String getEstoque() {
+  public Integer getEstoque() {
     return estoque;
   }
 
-  public void setEstoque(String estoque) {
+  public void setEstoque(Integer estoque) {
     this.estoque = estoque;
   }
 

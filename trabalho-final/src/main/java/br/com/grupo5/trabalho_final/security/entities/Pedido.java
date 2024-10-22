@@ -1,7 +1,6 @@
 package br.com.grupo5.trabalho_final.security.entities;
 
-import java.util.Set;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +15,7 @@ import jakarta.persistence.Table;
 public class Pedido {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "ped_cd_id")
   private Integer id;
 
   public Pedido() {
@@ -30,11 +30,12 @@ public class Pedido {
   }
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "loja_id")
-  private Set<Pedido> pedidos;
-
-  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
-  private Set<User> users;
+  private User user;
+
+  @Override
+  public String toString() {
+    return "Pedido [id=" + id + "]";
+  }
 
 }
