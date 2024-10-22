@@ -17,38 +17,35 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@Entity 
-@Table
-	(name = "users", uniqueConstraints = {
+@Entity
+@Table(name = "users", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "username"),
-		@UniqueConstraint(columnNames = "email") 
-	})
+		@UniqueConstraint(columnNames = "email")
+})
 
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank 
-	@Size(max = 20) 
+	@NotBlank
+	@Size(max = 20)
 	private String username;
 
 	@NotBlank
 	@Size(max = 50)
-	@Email 
+	@Email
 	private String email;
 
 	@NotBlank
 	@Size(max = 120)
 	private String password;
 
-	 
-	@ManyToMany(fetch = FetchType.LAZY) 
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	
+
 	private Set<Role> roles = new HashSet<>();
 
-	
 	public User() {
 	}
 
@@ -58,7 +55,6 @@ public class User {
 		this.password = password;
 	}
 
-	//Getters e Setters
 	public Integer getId() {
 		return id;
 	}

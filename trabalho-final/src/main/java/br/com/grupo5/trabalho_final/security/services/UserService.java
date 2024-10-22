@@ -4,6 +4,7 @@ import br.com.grupo5.trabalho_final.security.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.grupo5.trabalho_final.security.dto.UserRequestDTO;
 // import br.com.grupo5.trabalho_final.security.dto.UserRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.UserResponseDTO;
 import br.com.grupo5.trabalho_final.security.repositories.UserRepository;
@@ -31,19 +32,19 @@ public class UserService {
     }
   }
 
-  // public String updateUserById(Integer id, UserRequestDTO entity) {
-  // try {
-  // User user = userRepository.findById(id)
-  // .orElse(new User(entity.getUsername(), entity.getEmail(),
-  // entity.getPassword()));
-  // user.setUsername(entity.getUsername());
-  // user.setEmail(entity.getEmail());
-  // user.setPassword(entity.getPassword());
-  // userRepository.save(user);
-  // return "User updated successfully!";
-  // } catch (Exception e) {
-  // throw new RuntimeException("Could not update user with id: " + id);
-  // }
-  // }
+  public String updateUserById(Integer id, UserRequestDTO user) {
+    if (!userRepository.existsById(id)) {
+      throw new RuntimeException("User Not Found with id: " + id);
+    }
+    try {
+      User updateUser = userRepository.findById(id).get();
+      updateUser.setUsername(user.getUsername());
+      updateUser.setEmail(user.getEmail());
+      userRepository.save(updateUser);
+      return "User updated successfully!";
+    } catch (Exception e) {
+      throw new RuntimeException("Could not update user with id: " + id);
+    }
+  }
 
 }

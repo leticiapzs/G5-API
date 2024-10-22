@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.RestController;
 
-// import br.com.grupo5.trabalho_final.security.dto.UserRequestDTO;
+import br.com.grupo5.trabalho_final.security.dto.UserRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.UserResponseDTO;
 import br.com.grupo5.trabalho_final.security.services.UserService;
-// import org.springframework.web.bind.annotation.PutMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
-// import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/user")
@@ -37,9 +37,8 @@ public class UserController {
     return userService.deleteUserById(id);
   }
 
-  // @PutMapping("/{id}")
-  // public String putMethodName(@PathVariable Integer id, @RequestBody
-  // UserRequestDTO entity) {
-  // return userService.updateUserById(id, entity);
-  // }
+  @PutMapping("/{id}")
+  public String putMethodName(@PathVariable Integer id, @RequestBody UserRequestDTO user) {
+    return userService.updateUserById(id, user);
+  }
 }
