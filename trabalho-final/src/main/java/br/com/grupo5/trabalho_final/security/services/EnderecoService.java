@@ -16,13 +16,9 @@ public class EnderecoService {
 
 	@Autowired
 	Util util;
-	
 
 	@Autowired
 	EnderecoRepository enderecoRepository;
-	
-	public EnderecoResponseDTO consultarEndereco(EnderecoRequestDTO enderecoDto) {
-		EnderecoResponseDTO viaCep = util.buscarEndereco(enderecoDto.getCep());
 
 	public EnderecoResponseDTO cadastrarEndereco(EnderecoRequestDTO enderecoDto) {
 		Endereco endereco = criarEndereco(enderecoDto);
@@ -33,19 +29,12 @@ public class EnderecoService {
 	}
 
 	public Endereco criarEndereco(EnderecoRequestDTO enderecoDto) {
-		
+
 		EnderecoResponseDTO viaCep = util.buscarEndereco(enderecoDto.getCep());
 
 		EnderecoResponseDTO endereco = new EnderecoResponseDTO();
 		endereco.setCep(viaCep.getCep());
 		endereco.setLogradouro(viaCep.getLogradouro());
-        endereco.setNumero(enderecoDto.getNumero());
-        endereco.setComplemento(enderecoDto.getComplemento());
-        endereco.setBairro(viaCep.getBairro());
-        endereco.setLocalidade(viaCep.getLocalidade());
-        endereco.setUf(viaCep.getUf());
-        endereco.setEstado(viaCep.getEstado());
-		
 		endereco.setNumero(enderecoDto.getNumero());
 		endereco.setComplemento(enderecoDto.getComplemento());
 		endereco.setBairro(viaCep.getBairro());
@@ -54,15 +43,10 @@ public class EnderecoService {
 		endereco.setEstado(viaCep.getEstado());
 
 		Endereco enderecoConvertido = endereco.toEndereco();
-		enderecoRepository.save(enderecoConvertido);
-		
-		return endereco;
 		return enderecoConvertido;
 	}
-	
 
 	public EnderecoResponseDTO buscarEndereco(Integer id) {
-		Optional <Endereco> endereco = enderecoRepository.findById(id);
 		Optional<Endereco> endereco = enderecoRepository.findById(id);
 		EnderecoResponseDTO enderecoResponseDTO = new EnderecoResponseDTO();
 		enderecoResponseDTO.setCep(endereco.get().getCep());
@@ -73,14 +57,11 @@ public class EnderecoService {
 		enderecoResponseDTO.setLocalidade(endereco.get().getLocalidade());
 		enderecoResponseDTO.setUf(endereco.get().getUf());
 		enderecoResponseDTO.setEstado(endereco.get().getEstado());
-		
 
 		return enderecoResponseDTO;
 	}
-	
 
 	public boolean enderecoDelete(Integer id) {
-		if(enderecoRepository.existsById(id)) {
 		if (enderecoRepository.existsById(id)) {
 			enderecoRepository.deleteById(id);
 			return true;
@@ -88,12 +69,13 @@ public class EnderecoService {
 			return false;
 		}
 	}
-	public String alteracaoEndereco (Integer id , EnderecoResponseDTO endereco){
-		if (!enderecoRepository.existsById(id)){
+
+	public String alteracaoEndereco(Integer id, EnderecoResponseDTO endereco) {
+		if (!enderecoRepository.existsById(id)) {
 			throw new RuntimeException("endereco nao encontrado ");
 		}
 		try {
-			Endereco enderecoResponseDTO=enderecoRepository.findById(id).get();
+			Endereco enderecoResponseDTO = enderecoRepository.findById(id).get();
 			enderecoResponseDTO.setCep(endereco.getCep());
 			enderecoResponseDTO.setLogradouro(endereco.getLogradouro());
 			enderecoResponseDTO.setNumero(endereco.getNumero());
@@ -101,11 +83,12 @@ public class EnderecoService {
 			enderecoResponseDTO.setBairro(endereco.getBairro());
 			enderecoResponseDTO.setLocalidade(endereco.getLocalidade());
 			enderecoResponseDTO.setUf(endereco.getUf());
-			enderecoResponseDTO.setEstado(endereco.getEstado());	
+			enderecoResponseDTO.setEstado(endereco.getEstado());
 			enderecoRepository.save(enderecoResponseDTO);
 			return "Endereco alterado com sucesso!";
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException("nao pode alteral endereco");
 		}
 	}
+
 }
