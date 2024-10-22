@@ -14,38 +14,37 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="loja")
+@Table(name = "loja")
 public class Loja {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="lo_cd_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "lo_cd_id")
 	private Integer id;
-	
-	
-	@Column(name="lo_tx_cnpj")
+
+	@Column(name = "lo_tx_cnpj")
 	private String cnpj;
-	
-	@Column(name="lo_tx_nome_fantasia")
+
+	@Column(name = "lo_tx_nome_fantasia")
 	private String nomeFantasia;
-	
+
 	@OneToOne
-	@Column(name="lo_cd_id_endereco")
+	@JoinColumn(name = "lo_cd_id_endereco")
 	private Endereco fkEndereco;
-	
+
 	@OneToMany
-	@JoinColumn(name="lo_tx_produto")
-	private Set<Produto> produtos=new HashSet<>();
-	
+	@JoinColumn(name = "lo_tx_produto")
+	private Set<Produto> produtos = new HashSet<>();
+
 	@OneToOne
-	@Column(name="lo_tx_user")
-	private String fkUser;
+	@JoinColumn(name = "lo_tx_user")
+	private User fkUser;
 
 	public Loja() {
 	}
 
 	public Loja(String cnpj, String nomeFantasia, Endereco id_endereco, Set<Produto> produtos,
-			String fkUser) {
+			User fkUser) {
 		this.cnpj = cnpj;
 		this.nomeFantasia = nomeFantasia;
 		this.fkEndereco = id_endereco;
@@ -89,11 +88,11 @@ public class Loja {
 		this.produtos = produtos;
 	}
 
-	public String getFkUser() {
+	public User getFkUser() {
 		return fkUser;
 	}
 
-	public void setFkUser(String fkUser) {
+	public void setFkUser(User fkUser) {
 		this.fkUser = fkUser;
 	}
 
@@ -106,6 +105,4 @@ public class Loja {
 		return "Loja [id=" + id + ", cnpj=" + cnpj + ", nome_fantasia=" + nomeFantasia + ", fkUser=" + fkUser + "]";
 	}
 
-
-	
 }

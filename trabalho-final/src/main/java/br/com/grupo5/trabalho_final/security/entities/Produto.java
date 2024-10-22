@@ -5,13 +5,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 
-import jakarta.persistence.ManyToMany;
+// import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.JoinTable;
+// import jakarta.persistence.JoinColumn;
 
 import java.util.Set;
 
@@ -35,9 +36,13 @@ public class Produto {
   @Column(name = "prod_int_estoque")
   private Integer estoque;
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "pedido_id"))
-  private Set<Pedido> pedidos;
+  @OneToMany(mappedBy = "produto", fetch = FetchType.LAZY)
+  private Set<PedidoProduto> pedidoProdutos;
+
+  // @ManyToMany(fetch = FetchType.LAZY)
+  // @JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name =
+  // "produto_id"), inverseJoinColumns = @JoinColumn(name = "pedido_id"))
+  // private Set<Pedido> pedidos;
 
   public Produto() {
   }

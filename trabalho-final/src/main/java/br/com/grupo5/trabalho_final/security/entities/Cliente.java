@@ -16,30 +16,30 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "cliente")
 public class Cliente {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cli_cd_id")
 	private Integer id;
-	
+
 	@Column(name = "cli_tx_nome")
 	private String nomeCompleto;
-	
+
 	@Column(name = "cli_tx_cpf")
 	private String cpf;
-	
+
 	@OneToMany
 	@JoinColumn(name = "cli_fk_end")
 	private List<Endereco> fkEndereco;
-	
+
 	@Column(name = "cli_dt_nasc")
 	private LocalDate dataDeNascimento;
-	
+
 	@OneToOne
-	@Column(name = "cli_fk_user")
+	@JoinColumn(name = "cli_fk_user")
 	private User user;
-	
-	public Cliente () {
+
+	public Cliente() {
 	}
 
 	public Cliente(Integer id, String nomeCompleto, String cpf, List<Endereco> fkEndereco, LocalDate dataDeNascimento,
