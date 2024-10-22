@@ -38,8 +38,12 @@ public class UserService {
     }
     try {
       User updateUser = userRepository.findById(id).get();
-      updateUser.setUsername(user.getUsername());
-      updateUser.setEmail(user.getEmail());
+      if (user.getUsername() != null) {
+        updateUser.setUsername(user.getUsername());
+      }
+      if (user.getEmail() != null) {
+        updateUser.setEmail(user.getEmail());
+      }
       userRepository.save(updateUser);
       return "User updated successfully!";
     } catch (Exception e) {
