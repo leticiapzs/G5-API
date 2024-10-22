@@ -4,8 +4,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.com.grupo5.trabalho_final.security.dto.EnderecoResponseDTO;
+
 import br.com.grupo5.trabalho_final.security.dto.EnderecoRequestDTO;
+import br.com.grupo5.trabalho_final.security.dto.EnderecoResponseDTO;
 import br.com.grupo5.trabalho_final.security.entities.Endereco;
 import br.com.grupo5.trabalho_final.security.repositories.EnderecoRepository;
 import br.com.grupo5.trabalho_final.utils.Util;
@@ -61,5 +62,24 @@ public class EnderecoService {
 			return false;
 		}
 	}
-	
+	public String alteracaoEndereco (Integer id , EnderecoResponseDTO endereco){
+		if (!enderecoRepository.existsById(id)){
+			throw new RuntimeException("endereco nao encontrado ");
+		}
+		try {
+			Endereco enderecoResponseDTO=enderecoRepository.findById(id).get();
+			enderecoResponseDTO.setCep(endereco.getCep());
+			enderecoResponseDTO.setLogradouro(endereco.getLogradouro());
+			enderecoResponseDTO.setNumero(endereco.getNumero());
+			enderecoResponseDTO.setComplemento(endereco.getComplemento());
+			enderecoResponseDTO.setBairro(endereco.getBairro());
+			enderecoResponseDTO.setLocalidade(endereco.getLocalidade());
+			enderecoResponseDTO.setUf(endereco.getUf());
+			enderecoResponseDTO.setEstado(endereco.getEstado());	
+			enderecoRepository.save(enderecoResponseDTO);
+			return "Endereco alterado com sucesso!";
+		}catch(Exception e) {
+			throw new RuntimeException("nao pode alteral endereco");
+		}
+	}
 }
