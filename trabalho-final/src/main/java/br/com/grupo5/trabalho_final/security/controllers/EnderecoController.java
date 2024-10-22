@@ -22,36 +22,31 @@ public class EnderecoController {
 
 	@Autowired
 	EnderecoService enderecoService;
-	
-//  @GetMapping
-//  public String getAllEnderecos() {
-//    return "All Addresses";
-//  }
- 
-  @PostMapping("/adicionando-endereco")
-  public EnderecoResponseDTO testeEndereco(@RequestBody EnderecoRequestDTO enderecoDto) {
-	  return enderecoService.consultarEndereco(enderecoDto);  
-  }
+
+	@PostMapping("/adicionando-endereco")
+	public EnderecoResponseDTO testeEndereco(@RequestBody EnderecoRequestDTO enderecoDto) {
+		return enderecoService.cadastrarEndereco(enderecoDto);
+	}
 
 	@GetMapping("/buscando-endereco/{id}")
 	public EnderecoResponseDTO buscarEndereco(@PathVariable Integer id) {
 		return enderecoService.buscarEndereco(id);
 	}
-	
+
 	@DeleteMapping("/deletando-endereco/{id}")
 	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
 		boolean resultDelete = enderecoService.enderecoDelete(id);
-		if(resultDelete) {
+		if (resultDelete) {
 			return ResponseEntity.status(HttpStatus.OK).body("Endereço deletado com sucesso!");
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Endereço não deletado!");
-        }
-	
+		}
+
 	}
-	
+
 	@PutMapping("/alterando-endereco/{id}")
-	public String alteracaoEndereco (@PathVariable Integer id , @RequestBody EnderecoResponseDTO endereco) {
-		return enderecoService.alteracaoEndereco(id,endereco);
+	public String alteracaoEndereco(@PathVariable Integer id, @RequestBody EnderecoResponseDTO endereco) {
+		return enderecoService.alteracaoEndereco(id, endereco);
 	}
 
 }
