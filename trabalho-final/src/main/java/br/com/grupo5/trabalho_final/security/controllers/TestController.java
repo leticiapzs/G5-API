@@ -12,27 +12,27 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @RequestMapping("/test")
 public class TestController {
-	
-	@GetMapping("/all")
+
+	@GetMapping
 	public String allAccess() {
 		return "Public Content.";
 	}
 
-	@SecurityRequirement(name="Bearer Auth")
+	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/user")
 	public String userAccess() {
 		return "User Content.";
 	}
 
-	@SecurityRequirement(name="Bearer Auth")
+	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('MOD')")
 	@GetMapping("/mod")
 	public String moderatorAccess() {
 		return "Moderator Board.";
 	}
 
-	@SecurityRequirement(name="Bearer Auth")
+	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/admin")
 	public String adminAccess() {

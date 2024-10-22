@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/endereco")
 public class EnderecoController {
 
-  @GetMapping("/")
+  @GetMapping
   public String getAllEnderecos() {
     return "All Addresses";
   }
