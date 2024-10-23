@@ -23,6 +23,12 @@ public class SignupRequestDTO {
 	@Size(min = 6, max = 40)
 	private String password;
 
+	public SignupRequestDTO(String username, String password, String email) {
+	 this.username = username;
+	 this.password = password;
+	 this.email = email;
+	}
+
 	public String getUsername() {
 		return username;
 	}

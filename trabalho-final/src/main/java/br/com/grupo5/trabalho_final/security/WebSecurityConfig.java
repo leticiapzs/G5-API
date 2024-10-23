@@ -43,7 +43,7 @@ public class WebSecurityConfig {
 						.requestMatchers("/g6/**", "/auth/**", "/h2-console/**", "/roles/**", "/test/all/**",
 								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**", "user/**", "/cliente/**", "/produto/**",
 								"/endereco/**", "/adicionando-endereco/**", "/buscando-endereco/{id}/**", "/deletando-endereco/{id}/**",
-								"/pedido/**", "/loja/**")
+								"/pedido/**", "/loja/**", "/cadastro/**")
 						.permitAll()
 						.requestMatchers("/user/**").hasAnyRole("USER")
 						.requestMatchers("/test/user/**").hasAnyRole("USER", "ADMIN")

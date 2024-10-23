@@ -3,6 +3,7 @@ package br.com.grupo5.trabalho_final.security.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Loja {
 	@Column(name = "lo_tx_nome_fantasia")
 	private String nomeFantasia;
 
-	@OneToOne
+	@OneToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name = "lo_cd_id_endereco")
 	private Endereco fkEndereco;
 
