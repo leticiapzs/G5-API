@@ -71,4 +71,14 @@ public class LojaService {
 		
 		return ResponseEntity.ok(new MessageResponseDTO("Loja cadastrada com sucesso"));
 	}
+
+	public boolean lojaDelete(Integer id) {
+		if (lojaRepository.existsById(id)) {
+			lojaRepository.deleteById(id);
+			return true;
+		} else {
+			return false;
+
+		}
+	}
 }
