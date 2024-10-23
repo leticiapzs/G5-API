@@ -36,4 +36,14 @@ public class LojaService {
 		lojaRepository.save(loja);
 		return loja;
 	}
+
+	public boolean lojaDelete(Integer id) {
+		if (lojaRepository.existsById(id)) {
+			lojaRepository.deleteById(id);
+			return true;
+		} else {
+			return false;
+
+		}
+	}
 }
