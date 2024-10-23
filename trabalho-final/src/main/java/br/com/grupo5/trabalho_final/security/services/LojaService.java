@@ -18,9 +18,7 @@ public class LojaService {
 	EnderecoService enderecoService;
 
 	public List<Loja> getAllLojas() {
-
 		return lojaRepository.findAll();
-
 	}
 
 	public Loja getLojaById(Integer id) {

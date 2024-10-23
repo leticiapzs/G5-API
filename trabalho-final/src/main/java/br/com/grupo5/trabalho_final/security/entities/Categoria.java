@@ -21,6 +21,9 @@ public class Categoria {
   @Column(name = "cat_tx_nome")
   private String nome;
 
+  @Column(name = "cat_tx_descricao")
+  private String descricao;
+
   @OneToMany
   @JoinColumn(name = "cat_fk_prod")
   private List<Produto> fkProduto;
@@ -48,6 +51,14 @@ public class Categoria {
 
   public void setNome(String nome) {
     this.nome = nome;
+  }
+
+  public String getDescricao() {
+    return descricao;
+  }
+
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
   }
 
   public List<Produto> getFkProduto() {
