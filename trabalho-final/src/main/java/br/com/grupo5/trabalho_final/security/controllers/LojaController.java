@@ -40,9 +40,9 @@ public class LojaController {
 	}
 
 	@PostMapping("/cadastro")
-	public String cadastroLoja(@RequestBody LojaRequestDTO lojadto) {
-		lojaService.cadastrarLoja(lojadto);
-		return "funcionou";
+
+	public ResponseEntity<?> cadastroLoja(@RequestBody LojaRequestDTO lojadto) {
+		return lojaService.cadastrarLoja(lojadto);
 
 	}
 
@@ -54,6 +54,5 @@ public class LojaController {
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao deletar objeto");
 		}
-
 	}
 }

@@ -30,7 +30,7 @@ public class Loja {
 	private String nomeFantasia;
 
 	@OneToOne (cascade = CascadeType.ALL)
-	@JoinColumn(name = "lo_cd_id_endereco")
+	@JoinColumn(name = "lo_fk_endereco")
 	private Endereco fkEndereco;
 
 	@OneToMany
@@ -38,7 +38,7 @@ public class Loja {
 	private Set<Produto> produtos = new HashSet<>();
 
 	@OneToOne
-	@JoinColumn(name = "lo_tx_user")
+	@JoinColumn(name = "lo_fk_user")
 	private User fkUser;
 
 	public Loja() {
