@@ -2,6 +2,7 @@ package br.com.grupo5.trabalho_final.security.controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,21 +37,22 @@ public class CategoriaController {
   @SecurityRequirement(name = "Bearer Auth")
   @PreAuthorize("hasRole('USER')")
   @PostMapping("/create")
-  public String createCategory(@RequestBody CategoriaRequestDTO categoriaRequestDTO) {
+  public ResponseEntity<?> createCategory(@RequestBody CategoriaRequestDTO categoriaRequestDTO) {
     return categoriaService.createCategory(categoriaRequestDTO);
   }
 
   @SecurityRequirement(name = "Bearer Auth")
   @PreAuthorize("hasRole('USER')")
   @PutMapping("update/{id}")
-  public String updateCategory(@PathVariable String id, @RequestBody CategoriaRequestDTO categoriaRequestDTO) {
+  public ResponseEntity<?> updateCategory(@PathVariable String id,
+      @RequestBody CategoriaRequestDTO categoriaRequestDTO) {
     return categoriaService.updateCategory(id, categoriaRequestDTO);
   }
 
   @SecurityRequirement(name = "Bearer Auth")
   @PreAuthorize("hasRole('USER')")
   @DeleteMapping("delete/{id}")
-  public String deleteCategory(@PathVariable String id) {
+  public ResponseEntity<?> deleteCategory(@PathVariable String id) {
     return categoriaService.deleteCategory(id);
   }
 
