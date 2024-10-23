@@ -1,8 +1,6 @@
 package br.com.grupo5.trabalho_final.security.controllers;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.grupo5.trabalho_final.security.dto.JwtResponseDTO;
 import br.com.grupo5.trabalho_final.security.dto.LoginRequestDTO;
-import br.com.grupo5.trabalho_final.security.dto.MessageResponseDTO;
-import br.com.grupo5.trabalho_final.security.dto.SignupRequestDTO;
-import br.com.grupo5.trabalho_final.security.entities.Role;
-import br.com.grupo5.trabalho_final.security.entities.User;
-import br.com.grupo5.trabalho_final.security.enums.RoleEnum;
 import br.com.grupo5.trabalho_final.security.jwt.JwtUtils;
 import br.com.grupo5.trabalho_final.security.repositories.RoleRepository;
 import br.com.grupo5.trabalho_final.security.repositories.UserRepository;

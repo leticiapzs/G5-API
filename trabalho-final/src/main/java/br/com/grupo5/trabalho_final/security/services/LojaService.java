@@ -1,13 +1,14 @@
 package br.com.grupo5.trabalho_final.security.services;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.grupo5.trabalho_final.security.dto.LojaPutRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.LojaRequestDTO;
@@ -18,7 +19,6 @@ import br.com.grupo5.trabalho_final.security.entities.Loja;
 import br.com.grupo5.trabalho_final.security.entities.User;
 import br.com.grupo5.trabalho_final.security.repositories.EnderecoRepository;
 import br.com.grupo5.trabalho_final.security.repositories.LojaRepository;
-import br.com.grupo5.trabalho_final.security.repositories.UserRepository;
 
 @Service
 public class LojaService {
@@ -33,13 +33,10 @@ public class LojaService {
 	AuthenticationService authService;
 
 	@Autowired
-	UserRepository userRepository;
-
-	@Autowired
-	PasswordEncoder encoder;
+	EnderecoRepository enderecoRepository;
 	
 	@Autowired
-	EnderecoRepository enderecoRepository;
+	FotoService fotoService;
 
 	public List<Loja> getAllLojas() {
 		return lojaRepository.findAll();
@@ -50,7 +47,7 @@ public class LojaService {
 		return loja;
 	}
 
-	public ResponseEntity<?> cadastrarLoja(LojaRequestDTO lojaDTO) {
+	public ResponseEntity<?> cadastrarLoja(LojaRequestDTO lojaDTO, MultipartFile foto) throws IOException {
 		// cria o endereço
 		Endereco endereco = enderecoService.criarEndereco(lojaDTO.toEnderecoDTO());
 
@@ -76,6 +73,7 @@ public class LojaService {
 		loja.setFkEndereco(endereco);
 		loja.setFkUser(user);
 		lojaRepository.save(loja);
+		fotoService.cadastrarFoto(foto, loja);
 
 		return ResponseEntity.ok(new MessageResponseDTO("Loja cadastrada com sucesso"));
 	}
