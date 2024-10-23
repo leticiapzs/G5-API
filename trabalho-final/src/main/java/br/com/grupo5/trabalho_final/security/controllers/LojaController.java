@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.grupo5.trabalho_final.security.dto.LojaPutRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.LojaRequestDTO;
 import br.com.grupo5.trabalho_final.security.entities.Loja;
 import br.com.grupo5.trabalho_final.security.services.LojaService;
@@ -50,9 +52,14 @@ public class LojaController {
 	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
 		boolean resultDelete = lojaService.lojaDelete(id);
 		if (resultDelete) {
-			return ResponseEntity.status(HttpStatus.OK).body("Objeto deletado com sucesso");
+			return ResponseEntity.status(HttpStatus.OK).body("Objeto excluído com sucesso.");
 		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao deletar objeto");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao excluir objeto.");
 		}
+	}
+	
+	@PutMapping("/alterar-loja/")
+	public ResponseEntity<?> alteraLoja(@PathVariable String cnpj, @RequestBody LojaPutRequestDTO lojadto) {
+		return lojaService.alterarLoja(cnpj, lojadto);
 	}
 }
