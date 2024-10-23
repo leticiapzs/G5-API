@@ -10,6 +10,8 @@ public class LojaRequestDTO {
 	private String complemento;
 	private Integer numero;
 	private String cep;
+	
+	
 	public String getCnpj() {
 		return cnpj;
 	}

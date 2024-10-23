@@ -33,11 +33,11 @@ public class Loja {
 	@JoinColumn(name = "lo_fk_endereco")
 	private Endereco fkEndereco;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "lo_tx_produto")
 	private Set<Produto> produtos = new HashSet<>();
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "lo_fk_user")
 	private User fkUser;
 
