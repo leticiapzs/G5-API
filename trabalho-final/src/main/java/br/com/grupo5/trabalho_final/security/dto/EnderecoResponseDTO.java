@@ -89,6 +89,7 @@ public class EnderecoResponseDTO {
 		this.localidade = endereco.getLocalidade();
 		this.logradouro = endereco.getLogradouro();
 		this.uf = endereco.getUf();
+		this.numero = endereco.getNumero();
 	}
 	
 	public EnderecoResponseDTO () {

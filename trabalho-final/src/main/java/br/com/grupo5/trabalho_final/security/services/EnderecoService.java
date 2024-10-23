@@ -70,25 +70,37 @@ public class EnderecoService {
 		}
 	}
 
-	public String alteracaoEndereco(Integer id, EnderecoResponseDTO endereco) {
-		if (!enderecoRepository.existsById(id)) {
-			throw new RuntimeException("endereco nao encontrado ");
-		}
-		try {
-			Endereco enderecoResponseDTO = enderecoRepository.findById(id).get();
-			enderecoResponseDTO.setCep(endereco.getCep());
-			enderecoResponseDTO.setLogradouro(endereco.getLogradouro());
-			enderecoResponseDTO.setNumero(endereco.getNumero());
-			enderecoResponseDTO.setComplemento(endereco.getComplemento());
-			enderecoResponseDTO.setBairro(endereco.getBairro());
-			enderecoResponseDTO.setLocalidade(endereco.getLocalidade());
-			enderecoResponseDTO.setUf(endereco.getUf());
-			enderecoResponseDTO.setEstado(endereco.getEstado());
-			enderecoRepository.save(enderecoResponseDTO);
+	public String alteracaoEndereco(Integer id, EnderecoResponseDTO enderecoDTO) {
+		Endereco endereco = enderecoRepository.findById(id).
+				orElseThrow(() -> new RuntimeException("Endereço não encontrado")); 
+
+			if (enderecoDTO.getCep() != null) {
+			endereco.setCep(enderecoDTO.getCep());
+			}
+			if (enderecoDTO.getLogradouro() != null) {
+			endereco.setLogradouro(enderecoDTO.getLogradouro());
+			}
+			if (enderecoDTO.getNumero() != null) {
+			endereco.setNumero(enderecoDTO.getNumero());
+			}
+			if (enderecoDTO.getComplemento() != null) {
+			endereco.setComplemento(enderecoDTO.getComplemento());
+			}
+			if (enderecoDTO.getBairro() != null) {
+			endereco.setBairro(enderecoDTO.getBairro());
+			}
+			if (enderecoDTO.getLocalidade() != null) {
+			endereco.setLocalidade(enderecoDTO.getLocalidade());
+			}
+			if (enderecoDTO.getUf() != null) {
+			endereco.setUf(enderecoDTO.getUf());
+			}
+			if (enderecoDTO.getEstado() != null) {
+			endereco.setEstado(enderecoDTO.getEstado());
+			}
+			enderecoRepository.save(endereco);
 			return "Endereco alterado com sucesso!";
-		} catch (Exception e) {
-			throw new RuntimeException("nao pode alteral endereco");
-		}
+		
 	}
 
 }
