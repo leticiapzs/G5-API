@@ -32,7 +32,7 @@ public class SwaggerConfig {
 
 		Info info = new Info();
 		info.setTitle("Grupo 5 API");
-		info.setVersion("2.6.0");
+		info.setVersion("2.7.0");
 		info.setDescription("Trabalho final Grupo 5 API");
 		info.setLicense(license);
 		info.termsOfService("http://swagger.io/terms/");
