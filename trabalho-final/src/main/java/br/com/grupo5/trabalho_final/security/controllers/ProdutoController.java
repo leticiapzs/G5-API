@@ -43,13 +43,14 @@ public class ProdutoController {
       @RequestBody ProdutoRequestDTO produtoRequestDTO) {
     return produtoService.updateProductById(id, produtoRequestDTO);
   }
+
   @DeleteMapping("/deleteId/{id}")
-	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
-		boolean resultDelete = produtoService.produtoDelete(id);
-		if (resultDelete) {
-			return ResponseEntity.status(HttpStatus.OK).body("Produto excluído com sucesso.");
-		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao excluir produto.");
-		}
-	}
+  public ResponseEntity<String> deleteById(@PathVariable Integer id) {
+    boolean resultDelete = produtoService.deleteProductById(id);
+    if (resultDelete) {
+      return ResponseEntity.status(HttpStatus.OK).body("Produto excluído com sucesso.");
+    } else {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao excluir produto.");
+    }
+  }
 }

@@ -24,8 +24,7 @@ public class ProdutoService {
 
 	public ResponseEntity<?> createProduct(ProdutoRequestDTO produtoRequestDTO) {
 		Produto produto = new Produto();
-		// produto.setCategoria(new Categoria(produtoRequestDTO.getCategoria()));
-
+		produto.setCategoria(new Categoria(produtoRequestDTO.getCategoria()));
 		produto.setNome(produtoRequestDTO.getNome());
 		produto.setDescricao(produtoRequestDTO.getDescricao());
 		produto.setValor(produtoRequestDTO.getValor());
@@ -45,11 +44,12 @@ public class ProdutoService {
 		produto.setCategoria(new Categoria(produtoRequestDTO.getCategoria()));
 		produto.setValor(produtoRequestDTO.getValor());
 		produto.setEstoque(produtoRequestDTO.getEstoque());
+		produto.setCategoria(new Categoria(produtoRequestDTO.getCategoria()));
 
 		return ResponseEntity.ok(produtoRepository.save(produto));
 	}
 
-	public boolean produtoDelete(Integer id) {
+	public boolean deleteProductById(Integer id) {
 		if (produtoRepository.existsById(id)) {
 			produtoRepository.deleteById(id);
 			return true;
