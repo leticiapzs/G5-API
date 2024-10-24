@@ -3,12 +3,14 @@ package br.com.grupo5.trabalho_final.security.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.grupo5.trabalho_final.security.dto.CupomRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.CupomResponseDTO;
 import br.com.grupo5.trabalho_final.security.entities.Cupom;
 import br.com.grupo5.trabalho_final.security.repositories.CupomRepository;
 
+@Service
 public class CupomService {
 
 	@Autowired

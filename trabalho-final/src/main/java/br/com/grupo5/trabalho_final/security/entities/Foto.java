@@ -30,6 +30,9 @@ public class Foto {
 	@Column(name = "ft_bt_dados")
 	private byte[] dados;
 	
+	@Column(name = "ft_tx_url")
+	private String url;
+	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "loj_cd_id")
 	private Loja loja;
@@ -37,12 +40,13 @@ public class Foto {
 	public Foto() {
 	}
 
-	public Foto(Integer id, String tipo, String nome, byte[] dados, Loja loja) {
+	public Foto(Integer id, String tipo, String nome, byte[] dados, Loja loja, String url) {
 		this.id = id;
 		this.tipo = tipo;
 		this.nome = nome;
 		this.dados = dados;
 		this.loja = loja;
+		this.url = url;
 	}
 
 	public Integer getId() {
@@ -83,6 +87,14 @@ public class Foto {
 
 	public void setLoja(Loja loja) {
 		this.loja = loja;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

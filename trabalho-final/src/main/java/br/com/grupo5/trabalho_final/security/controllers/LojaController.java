@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.grupo5.trabalho_final.security.dto.LojaPutRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.LojaRequestDTO;
 import br.com.grupo5.trabalho_final.security.entities.Loja;
+import br.com.grupo5.trabalho_final.security.services.FotoService;
 import br.com.grupo5.trabalho_final.security.services.LojaService;
 
 @RestController
@@ -26,6 +28,9 @@ import br.com.grupo5.trabalho_final.security.services.LojaService;
 public class LojaController {
 	@Autowired
 	private LojaService lojaService;
+	
+	@Autowired
+	FotoService fotoService;
 
 	@GetMapping
 	public ResponseEntity<?> getAllLojas() {
@@ -33,7 +38,7 @@ public class LojaController {
 
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/{id}/loja-foto")
 	public ResponseEntity<?> getLojaById(@PathVariable Integer id) {
 		try {
 			Loja loja = lojaService.getLojaById(id);
@@ -63,5 +68,11 @@ public class LojaController {
 	@PutMapping("/alterar-loja/")
 	public ResponseEntity<?> alteraLoja(@PathVariable String cnpj, @RequestBody LojaPutRequestDTO lojadto) {
 		return lojaService.alterarLoja(cnpj, lojadto);
+	}
+	
+	@GetMapping("/{idLoja}/foto")
+	public ResponseEntity<byte[]> retornoDaFoto (@PathVariable Integer idLoja) throws Exception{
+		byte[] foto = fotoService.getFoto(idLoja);
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(foto);
 	}
 }

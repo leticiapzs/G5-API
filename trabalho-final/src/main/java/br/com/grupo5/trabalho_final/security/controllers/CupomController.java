@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.example.atores.security.dto.SeriesResponseDTO;
 import br.com.grupo5.trabalho_final.security.dto.CupomRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.CupomResponseDTO;
 import br.com.grupo5.trabalho_final.security.dto.MessageResponseDTO;
