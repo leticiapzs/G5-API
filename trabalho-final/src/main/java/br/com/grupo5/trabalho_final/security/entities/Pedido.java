@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "pedido")
 public class Pedido {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ped_cd_id")
@@ -37,7 +37,7 @@ public class Pedido {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
-	
+
 	@Column(name = "ped_bool_ativo")
 	private boolean ativo;
 
@@ -86,7 +86,7 @@ public class Pedido {
 	public void setPedidoProdutos(Set<PedidoProduto> pedidoProdutos) {
 		this.pedidoProdutos = pedidoProdutos;
 	}
-	
+
 	public void adicionarProduto(PedidoProduto produto) {
 		this.pedidoProdutos.add(produto);
 	}
@@ -98,7 +98,7 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
+
 	public boolean isAtivo() {
 		return ativo;
 	}
@@ -112,10 +112,10 @@ public class Pedido {
 		this.ativo = true;
 	}
 
-	@PrePersist
-	protected void onCreate() {
-		this.date = new Date();
-	}
+	// @PrePersist
+	// protected void onCreate() {
+	// this.date = new Date();
+	// }
 
 	@Override
 	public String toString() {
