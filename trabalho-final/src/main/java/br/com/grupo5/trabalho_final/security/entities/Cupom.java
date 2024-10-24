@@ -15,7 +15,7 @@ public class Cupom {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cup_cd_id_loja")
-	private Integer idLoja;
+	private Integer id;
 	
 	@Column(name = "cup_cd_desconto")
 	private Integer desconto;
@@ -34,8 +34,7 @@ public class Cupom {
 	public Cupom() {
 	}
 
-	public Cupom(Integer idLoja, Integer desconto, Integer codigo, boolean boolean_ativo, Loja fkLoja) {
-		this.idLoja = idLoja;
+	public Cupom(Integer desconto, Integer codigo, boolean boolean_ativo, Loja fkLoja) {
 		this.desconto = desconto;
 		this.codigo = codigo;
 		this.boolean_ativo = boolean_ativo;
@@ -49,11 +48,11 @@ public class Cupom {
 	}
 
 	public Integer getIdLoja() {
-		return idLoja;
+		return id;
 	}
 	
 	public void setIdLoja(Integer idLoja) {
-		this.idLoja = idLoja;
+		this.id = idLoja;
 	}
 	
 	public Integer getDesconto() {
@@ -90,7 +89,7 @@ public class Cupom {
 
 	@Override
 	public String toString() {
-		return "Cupom [idLoja=" + idLoja + ", desconto=" + desconto + ", codigo=" + codigo + ", boolean_ativo="
+		return "Cupom [idLoja=" + id + ", desconto=" + desconto + ", codigo=" + codigo + ", boolean_ativo="
 				+ boolean_ativo + ", fkLoja=" + fkLoja + "]";
 	}
 

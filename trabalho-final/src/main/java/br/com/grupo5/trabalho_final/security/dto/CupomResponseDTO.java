@@ -7,6 +7,8 @@ public class CupomResponseDTO {
 	private Integer desconto;
 	private Integer codigo;
 	private boolean boolean_ativo;
+	
+	
 	public Integer getDesconto() {
 		return desconto;
 	}
