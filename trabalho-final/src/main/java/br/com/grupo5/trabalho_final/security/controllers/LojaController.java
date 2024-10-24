@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,7 +46,7 @@ public class LojaController {
 
 	@PostMapping("/cadastro")
 
-	public ResponseEntity<?> cadastroLoja(@RequestBody LojaRequestDTO lojadto, @RequestParam MultipartFile foto) throws IOException {
+	public ResponseEntity<?> cadastroLoja(@RequestPart LojaRequestDTO lojadto, @RequestPart MultipartFile foto) throws IOException {
 		return lojaService.cadastrarLoja(lojadto, foto);
 
 	}
