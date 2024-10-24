@@ -24,7 +24,7 @@ public class EnderecoController {
 	EnderecoService enderecoService;
 
 	@PostMapping("/adicionando-endereco")
-	public EnderecoResponseDTO testeEndereco(@RequestBody EnderecoRequestDTO enderecoDto) {
+	public EnderecoResponseDTO cadastrarEndereco(@RequestBody EnderecoRequestDTO enderecoDto) {
 		return enderecoService.cadastrarEndereco(enderecoDto);
 	}
 
