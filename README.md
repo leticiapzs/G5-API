@@ -2,7 +2,7 @@
 
 * Sobre o Projeto
 * Tecnologias utilizadas
-       * Autores do Projeto
+* Autores do Projeto
 
 
 ## Sobre o Projeto
