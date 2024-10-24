@@ -21,7 +21,7 @@ public class PedidoProduto {
   @JoinColumn(name = "pedido_id", insertable = false, updatable = false)
   private Pedido pedido;
 
-  private Integer estoque;
+  private Integer quantidade;
 
   // Getters and setters
   public PedidoProdutoId getId() {
@@ -48,11 +48,11 @@ public class PedidoProduto {
     this.pedido = pedido;
   }
 
-  public Integer getEstoque() {
-    return estoque;
+  public Integer getQuantidade() {
+    return quantidade;
   }
 
-  public void setEstoque(Integer estoque) {
-    this.estoque = estoque;
+  public void setQuantidade(Integer quantidade) {
+    this.quantidade = quantidade;
   }
 }

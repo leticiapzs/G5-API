@@ -27,6 +27,13 @@ public class Pedido {
   @Column(name = "date")
   private Date date;
 
+  @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY)
+  private Set<PedidoProduto> pedidoProdutos;
+  
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "cliente_id")
+  private Cliente cliente;
+  
   public Pedido() {
   }
 
@@ -50,13 +57,6 @@ public class Pedido {
   protected void onCreate() {
     this.date = new Date();
   }
-
-  @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY)
-  private Set<PedidoProduto> pedidoProdutos;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "cliente_id")
-  private Cliente cliente;
 
   @Override
   public String toString() {
