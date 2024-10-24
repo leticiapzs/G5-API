@@ -34,7 +34,7 @@ public class LojaService {
 
 	@Autowired
 	EnderecoRepository enderecoRepository;
-	
+
 	@Autowired
 	FotoService fotoService;
 
@@ -87,20 +87,20 @@ public class LojaService {
 
 		}
 	}
-	
+
 	public ResponseEntity<?> alterarLoja(String cnpj, LojaPutRequestDTO lojaDTO) {
-		
+
 		Loja loja = lojaRepository.findByCnpj(cnpj).get();
-			
-		if(lojaDTO.getCnpj() != null) {
-		loja.setCnpj(lojaDTO.getCnpj());
+
+		if (lojaDTO.getCnpj() != null) {
+			loja.setCnpj(lojaDTO.getCnpj());
 		}
-		if(lojaDTO.getNomeFantasia() != null) {
-		loja.setNomeFantasia(lojaDTO.getNomeFantasia());
+		if (lojaDTO.getNomeFantasia() != null) {
+			loja.setNomeFantasia(lojaDTO.getNomeFantasia());
 		}
-				
+
 		lojaRepository.save(loja);
-		
+
 		return ResponseEntity.ok(new MessageResponseDTO("Informações da loja alteradas com sucesso."));
 	}
 }

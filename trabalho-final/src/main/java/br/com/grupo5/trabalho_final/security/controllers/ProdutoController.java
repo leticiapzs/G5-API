@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.grupo5.trabalho_final.security.dto.ProdutoRequestDTO;
+import br.com.grupo5.trabalho_final.security.dto.ProdutoResponseDTO;
 import br.com.grupo5.trabalho_final.security.services.ProdutoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +41,7 @@ public class ProdutoController {
 
   @PutMapping("/{id}")
   public ResponseEntity<?> updateProductById(@PathVariable Integer id,
-      @RequestBody ProdutoRequestDTO produtoRequestDTO) {
+      @RequestBody ProdutoResponseDTO produtoRequestDTO) {
     return produtoService.updateProductById(id, produtoRequestDTO);
   }
 

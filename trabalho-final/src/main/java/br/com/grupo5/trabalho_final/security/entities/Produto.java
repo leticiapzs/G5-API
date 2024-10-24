@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,6 +42,10 @@ public class Produto {
   @ManyToOne
   @JoinColumn(name = "cat_fk_prod")
   private Categoria fkCategoria;
+
+  @OneToOne
+  @JoinColumn(name = "loj_fk_prod")
+  private Loja fkLoja;
 
   @OneToMany(mappedBy = "produto", fetch = FetchType.LAZY)
   private Set<PedidoProduto> pedidoProdutos;
@@ -103,6 +108,14 @@ public class Produto {
 
   public void setCategoria(Categoria fkCategoria) {
     this.fkCategoria = fkCategoria;
+  }
+
+  public Loja getLoja() {
+    return fkLoja;
+  }
+
+  public void setLoja(Loja fkLoja) {
+    this.fkLoja = fkLoja;
   }
 
   @Override

@@ -1,6 +1,6 @@
 package br.com.grupo5.trabalho_final.security.dto;
 
-public class ProdutoRequestDTO {
+public class ProdutoResponseDTO {
 
   private String nome;
 
@@ -10,21 +10,14 @@ public class ProdutoRequestDTO {
 
   private Integer estoque;
 
-  private String categoria;
-
-  private Integer fkLoja;
-
-  public ProdutoRequestDTO() {
+  public ProdutoResponseDTO() {
   }
 
-  public ProdutoRequestDTO(String nome, String descricao, Double valor, Integer estoque, String categoria,
-      Integer fkLoja) {
+  public ProdutoResponseDTO(String nome, String descricao, Double valor, Integer estoque) {
     this.nome = nome;
     this.descricao = descricao;
     this.valor = valor;
     this.estoque = estoque;
-    this.categoria = categoria;
-    this.fkLoja = fkLoja;
   }
 
   public String getNome() {
@@ -58,21 +51,4 @@ public class ProdutoRequestDTO {
   public void setEstoque(Integer estoque) {
     this.estoque = estoque;
   }
-
-  public String getCategoria() {
-    return categoria;
-  }
-
-  public void setCategoria(String categoria) {
-    this.categoria = categoria;
-  }
-
-  public Integer getLoja() {
-    return fkLoja;
-  }
-
-  public void setLoja(Integer fkLoja) {
-    this.fkLoja = fkLoja;
-  }
-
 }
