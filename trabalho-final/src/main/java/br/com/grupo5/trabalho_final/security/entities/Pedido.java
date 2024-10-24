@@ -1,5 +1,7 @@
 package br.com.grupo5.trabalho_final.security.entities;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -14,53 +16,110 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "pedido")
 public class Pedido {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "ped_cd_id")
-  private Integer id;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ped_cd_id")
+	private Integer id;
 
-  @Column(name = "date")
-  private Date date;
+	@Column(name = "date")
+	private Date date;
 
-  @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY)
-  private Set<PedidoProduto> pedidoProdutos;
-  
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "cliente_id")
-  private Cliente cliente;
-  
-  public Pedido() {
-  }
+	@Column(name = "ped_int_valortotal")
+	private Double valorTotal;
 
-  public Integer getId() {
-    return id;
-  }
+	@OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY)
+	private Set<PedidoProduto> pedidoProdutos;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+	
+	@Column(name = "ped_bool_ativo")
+	private boolean ativo;
 
-  public Date getDate() {
-    return date;
-  }
+	public Pedido() {
+	}
 
-  public void setDate(Date date) {
-    this.date = date;
-  }
+	public Pedido(Double valorTotal, Set<PedidoProduto> pedidoProdutos, Cliente cliente) {
+		this.valorTotal = valorTotal;
+		this.pedidoProdutos = pedidoProdutos;
+		this.cliente = cliente;
+	}
 
-  @PrePersist
-  protected void onCreate() {
-    this.date = new Date();
-  }
+	public Pedido(Cliente cliente) {
+		this.cliente = cliente;
+		this.pedidoProdutos = new HashSet<>();
+	}
 
-  @Override
-  public String toString() {
-    return "Pedido [id=" + id + ", date=" + date + "]";
-  }
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public Set<PedidoProduto> getPedidoProdutos() {
+		return pedidoProdutos;
+	}
+
+	public void setPedidoProdutos(Set<PedidoProduto> pedidoProdutos) {
+		this.pedidoProdutos = pedidoProdutos;
+	}
+	
+	public void adicionarProduto(PedidoProduto produto) {
+		this.pedidoProdutos.add(produto);
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	@PrePersist
+	protected void onCreation() {
+		this.ativo = true;
+	}
+
+	@PrePersist
+	protected void onCreate() {
+		this.date = new Date();
+	}
+
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", date=" + date + "]";
+	}
 
 }

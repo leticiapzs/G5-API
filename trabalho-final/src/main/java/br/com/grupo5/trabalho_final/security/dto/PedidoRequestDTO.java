@@ -1,16 +1,11 @@
 package br.com.grupo5.trabalho_final.security.dto;
 
-import java.util.Date;
-import java.util.Set;
-
 import br.com.grupo5.trabalho_final.security.entities.Cliente;
-import br.com.grupo5.trabalho_final.security.entities.PedidoProduto;
+import br.com.grupo5.trabalho_final.security.entities.Produto;
 
 public class PedidoRequestDTO {
 
-	private Date date;
-
-	private Set<PedidoProduto> pedidoProdutos;
+	private Produto produto;
 
 	private Cliente cliente;
 	
@@ -19,27 +14,10 @@ public class PedidoRequestDTO {
 	public PedidoRequestDTO() {
 	}
 
-	public PedidoRequestDTO(Date date, Set<PedidoProduto> pedidoProdutos, Cliente cliente, Integer quantidade) {
-		this.date = date;
-		this.pedidoProdutos = pedidoProdutos;
+	public PedidoRequestDTO(Produto produto, Cliente cliente, Integer quantidade) {
+		this.produto = produto;
 		this.cliente = cliente;
 		this.quantidade = quantidade;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public Set<PedidoProduto> getPedidoProdutos() {
-		return pedidoProdutos;
-	}
-
-	public void setPedidoProdutos(Set<PedidoProduto> pedidoProdutos) {
-		this.pedidoProdutos = pedidoProdutos;
 	}
 
 	public Cliente getCliente() {
@@ -56,6 +34,14 @@ public class PedidoRequestDTO {
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}	
 
 }

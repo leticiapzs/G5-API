@@ -23,7 +23,13 @@ public class PedidoProduto {
 
   private Integer quantidade;
 
-  // Getters and setters
+  public PedidoProduto(Pedido pedido, Produto produto, Integer quantidade) {
+	this.pedido = pedido;
+	this.produto = produto;
+	this.quantidade = quantidade;
+}
+
+// Getters and setters
   public PedidoProdutoId getId() {
     return id;
   }
@@ -55,4 +61,5 @@ public class PedidoProduto {
   public void setQuantidade(Integer quantidade) {
     this.quantidade = quantidade;
   }
+  
 }

@@ -1,6 +1,7 @@
 package br.com.grupo5.trabalho_final.security.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import br.com.grupo5.trabalho_final.security.entities.Pedido;
@@ -8,4 +9,6 @@ import br.com.grupo5.trabalho_final.security.entities.Pedido;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 
+	@Query(value = "select max(ped_cd_id) from pedido p where cliente_id = :idcliente;", nativeQuery = true)
+	public Pedido ultimoPedido(Integer idcliente);
 }
