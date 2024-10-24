@@ -1,7 +1,9 @@
 package br.com.grupo5.trabalho_final.security.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,5 +43,13 @@ public class ProdutoController {
       @RequestBody ProdutoRequestDTO produtoRequestDTO) {
     return produtoService.updateProductById(id, produtoRequestDTO);
   }
-
+  @DeleteMapping("/deleteId/{id}")
+	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
+		boolean resultDelete = produtoService.produtoDelete(id);
+		if (resultDelete) {
+			return ResponseEntity.status(HttpStatus.OK).body("Produto excluído com sucesso.");
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao excluir produto.");
+		}
+	}
 }
