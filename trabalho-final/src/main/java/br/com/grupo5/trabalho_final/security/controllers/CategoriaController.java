@@ -34,8 +34,8 @@ public class CategoriaController {
     return categoriaService.getAllCategorias();
   }
 
-  @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasRole('USER')")
+  // @SecurityRequirement(name = "Bearer Auth")
+  // @PreAuthorize("hasRole('USER')")
   @PostMapping("/create")
   public ResponseEntity<?> createCategory(@RequestBody CategoriaRequestDTO categoriaRequestDTO) {
     return categoriaService.createCategory(categoriaRequestDTO);

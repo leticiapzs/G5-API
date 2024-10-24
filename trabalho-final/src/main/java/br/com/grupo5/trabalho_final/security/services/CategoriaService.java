@@ -26,7 +26,6 @@ public class CategoriaService {
     try {
       Categoria categoria = new Categoria();
       categoria.setNome(categoriaDTO.getNome());
-      categoria.setDescricao(categoriaDTO.getDescricao());
       categoriaRepository.save(categoria);
       return ResponseEntity.ok(new MessageResponseDTO("Categoria criada com sucesso!"));
     } catch (Exception e) {
@@ -38,7 +37,6 @@ public class CategoriaService {
     try {
       Categoria categoria = categoriaRepository.findById(Integer.parseInt(id)).get();
       categoria.setNome(categoriaDTO.getNome());
-      categoria.setDescricao(categoriaDTO.getDescricao());
       categoriaRepository.save(categoria);
       return ResponseEntity.ok().build();
     } catch (Exception e) {
@@ -61,7 +59,6 @@ public class CategoriaService {
     Categoria categoria = categoriaRepository.findById(id).get();
     CategoriaRequestDTO categoriaDTO = new CategoriaRequestDTO();
     categoriaDTO.setNome(categoria.getNome());
-    categoriaDTO.setDescricao(categoria.getDescricao());
     return categoriaDTO;
   }
 }

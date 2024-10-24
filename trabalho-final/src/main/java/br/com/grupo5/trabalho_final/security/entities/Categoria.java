@@ -1,14 +1,10 @@
 package br.com.grupo5.trabalho_final.security.entities;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Categoria {
@@ -21,20 +17,11 @@ public class Categoria {
   @Column(name = "cat_tx_nome")
   private String nome;
 
-  @Column(name = "cat_tx_descricao")
-  private String descricao;
-
-  @OneToMany
-  @JoinColumn(name = "cat_fk_prod")
-  private List<Produto> fkProduto;
-
   public Categoria() {
   }
 
-  public Categoria(Integer id, String nome, List<Produto> fkProduto) {
-    this.id = id;
+  public Categoria(String nome) {
     this.nome = nome;
-    this.fkProduto = fkProduto;
   }
 
   public Integer getId() {
@@ -53,25 +40,9 @@ public class Categoria {
     this.nome = nome;
   }
 
-  public String getDescricao() {
-    return descricao;
-  }
-
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
-  }
-
-  public List<Produto> getFkProduto() {
-    return fkProduto;
-  }
-
-  public void setFkProduto(List<Produto> fkProduto) {
-    this.fkProduto = fkProduto;
-  }
-
   @Override
   public String toString() {
-    return "Categoria [id=" + id + ", nome=" + nome + ", fkProduto=" + fkProduto + "]";
+    return "Categoria [id=" + id + ", nome=" + nome + "]";
   }
 
 }

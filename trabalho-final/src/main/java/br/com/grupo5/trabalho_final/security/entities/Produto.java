@@ -3,17 +3,15 @@ package br.com.grupo5.trabalho_final.security.entities;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
-
-// import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-// import jakarta.persistence.JoinTable;
-// import jakarta.persistence.JoinColumn;
-
 import java.util.Set;
 
 @Entity
@@ -32,26 +30,31 @@ public class Produto {
   @Column(name = "prod_tx_descricao")
   private String descricao;
 
-  @NotBlank
+  @NotNull
+  @Column(name = "prod_int_valor")
+  private Double valor;
+
+  @NotNull
   @Column(name = "prod_int_estoque")
   private Integer estoque;
+
+  @ManyToOne
+  @JoinColumn(name = "cat_fk_prod")
+  private Categoria fkCategoria;
 
   @OneToMany(mappedBy = "produto", fetch = FetchType.LAZY)
   private Set<PedidoProduto> pedidoProdutos;
 
-  // @ManyToMany(fetch = FetchType.LAZY)
-  // @JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name =
-  // "produto_id"), inverseJoinColumns = @JoinColumn(name = "pedido_id"))
-  // private Set<Pedido> pedidos;
-
   public Produto() {
   }
 
-  public Produto(Integer id, String nome, String descricao, Integer estoque) {
+  public Produto(Integer id, String nome, String descricao, Double valor, Integer estoque, Categoria fkCategoria) {
     this.id = id;
     this.nome = nome;
     this.descricao = descricao;
+    this.valor = valor;
     this.estoque = estoque;
+    this.fkCategoria = fkCategoria;
   }
 
   public Integer getId() {
@@ -78,6 +81,14 @@ public class Produto {
     this.descricao = descricao;
   }
 
+  public Double getValor() {
+    return valor;
+  }
+
+  public void setValor(Double valor) {
+    this.valor = valor;
+  }
+
   public Integer getEstoque() {
     return estoque;
   }
@@ -86,8 +97,17 @@ public class Produto {
     this.estoque = estoque;
   }
 
+  public Categoria getCategoria() {
+    return fkCategoria;
+  }
+
+  public void setCategoria(Categoria fkCategoria) {
+    this.fkCategoria = fkCategoria;
+  }
+
   @Override
   public String toString() {
-    return "Produto [descricao=" + descricao + ", estoque=" + estoque + ", id=" + id + ", nome=" + nome + "]";
+    return "Produto [descricao=" + descricao + ", estoque=" + estoque + ", id=" + id + ", nome=" + nome + ", valor="
+        + valor + ", categoria=" + fkCategoria + "]";
   }
 }

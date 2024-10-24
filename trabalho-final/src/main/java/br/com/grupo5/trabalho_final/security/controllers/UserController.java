@@ -42,6 +42,8 @@ public class UserController {
     return userService.deleteUserById(id);
   }
 
+  @SecurityRequirement(name = "Bearer Auth")
+  @PreAuthorize("hasRole('USER')")
   @PutMapping("/{id}")
   public String putMethodName(@PathVariable Integer id, @RequestBody UserRequestDTO user) {
     return userService.updateUserById(id, user);
