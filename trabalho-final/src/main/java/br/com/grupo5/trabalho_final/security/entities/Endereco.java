@@ -1,5 +1,6 @@
 package br.com.grupo5.trabalho_final.security.entities;
 
+import br.com.grupo5.trabalho_final.security.dto.EnderecoResponseDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -147,6 +148,10 @@ public class Endereco {
 		return "Endereco [id=" + id + ", cep=" + cep + ", logradouro=" + logradouro + ", numero=" + numero
 				+ ", complemento=" + complemento + ", bairro=" + bairro + ", localidade=" + localidade + ", uf=" + uf
 				+ ", estado=" + estado + "]";
+	}
+	
+	public EnderecoResponseDTO toResponseDTO(){
+		return new EnderecoResponseDTO(this.cep, this.logradouro, this.numero, this.complemento, this.bairro, this.localidade, this.uf, this.estado);
 	}
 
 

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.grupo5.trabalho_final.security.dto.LojaPutRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.LojaRequestDTO;
+import br.com.grupo5.trabalho_final.security.dto.LojaResponseDTO;
 import br.com.grupo5.trabalho_final.security.dto.MessageResponseDTO;
 import br.com.grupo5.trabalho_final.security.dto.SignupRequestDTO;
 import br.com.grupo5.trabalho_final.security.entities.Endereco;
@@ -38,8 +39,16 @@ public class LojaService {
 	@Autowired
 	FotoService fotoService;
 
-	public List<Loja> getAllLojas() {
-		return lojaRepository.findAll();
+	@SuppressWarnings({ "null", "unused" })
+	public ResponseEntity<?> getAllLojas() {
+		List<LojaResponseDTO> lista = null;
+		for (Loja loja : lojaRepository.findAll()) {
+			lista.add(loja.toResponseDTO());
+		}
+		if (lista == null) {
+			return ResponseEntity.notFound().build();
+		} 
+		return ResponseEntity.ok(lista);
 	}
 
 	public Loja getLojaById(Integer id) {
