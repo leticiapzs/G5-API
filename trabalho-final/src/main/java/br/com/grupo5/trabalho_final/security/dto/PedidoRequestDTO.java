@@ -1,31 +1,41 @@
 package br.com.grupo5.trabalho_final.security.dto;
 
-import br.com.grupo5.trabalho_final.security.entities.Cliente;
-import br.com.grupo5.trabalho_final.security.entities.Produto;
-
 public class PedidoRequestDTO {
 
-	private Produto produto;
+	private Integer idProduto;
 
+<<<<<<< Updated upstream
 	private Cliente cliente;
 
+=======
+	private Integer idCliente;
+	
+>>>>>>> Stashed changes
 	private Integer quantidade;
 
 	public PedidoRequestDTO() {
 	}
 
-	public PedidoRequestDTO(Produto produto, Cliente cliente, Integer quantidade) {
-		this.produto = produto;
-		this.cliente = cliente;
+	public PedidoRequestDTO(Integer idProduto, Integer idCliente, Integer quantidade) {
+		this.idProduto = idProduto;
+		this.idCliente = idCliente;
 		this.quantidade = quantidade;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Integer getIdProduto() {
+		return idProduto;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setIdProduto(Integer idProduto) {
+		this.idProduto = idProduto;
+	}
+
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public Integer getQuantidade() {
@@ -36,6 +46,7 @@ public class PedidoRequestDTO {
 		this.quantidade = quantidade;
 	}
 
+<<<<<<< Updated upstream
 	public Produto getProduto() {
 		return produto;
 	}
@@ -43,5 +54,8 @@ public class PedidoRequestDTO {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+=======
+	
+>>>>>>> Stashed changes
 
 }

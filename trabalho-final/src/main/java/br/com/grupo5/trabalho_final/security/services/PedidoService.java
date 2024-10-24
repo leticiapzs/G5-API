@@ -8,6 +8,8 @@ import br.com.grupo5.trabalho_final.security.dto.PedidoRequestDTO;
 import br.com.grupo5.trabalho_final.security.entities.Cliente;
 import br.com.grupo5.trabalho_final.security.entities.Pedido;
 import br.com.grupo5.trabalho_final.security.entities.PedidoProduto;
+import br.com.grupo5.trabalho_final.security.entities.Produto;
+import br.com.grupo5.trabalho_final.security.repositories.ClienteRepository;
 import br.com.grupo5.trabalho_final.security.repositories.PedidoProdutoRepository;
 import br.com.grupo5.trabalho_final.security.repositories.PedidoRepository;
 import br.com.grupo5.trabalho_final.security.repositories.ProdutoRepository;
@@ -23,6 +25,9 @@ public class PedidoService {
 
 	@Autowired
 	ProdutoRepository produtoRepo;
+	
+	@Autowired
+	ClienteRepository clienteRepo;
 
 	public String listaProdutos(Integer idCliente) {
 		String listaDeProdutos = "";
@@ -48,19 +53,24 @@ public class PedidoService {
 	}
 
 	public ResponseEntity<?> adicionarProduto(PedidoRequestDTO pedidoDTO) {
-		Pedido pedidoExistente = pedidoRepo.ultimoPedido(pedidoDTO.getCliente().getId());
+		Pedido pedidoExistente = pedidoRepo.ultimoPedido(pedidoDTO.getIdCliente());
 		if (!pedidoExistente.isAtivo() || pedidoExistente == null) {
-			Pedido pedido = new Pedido(pedidoDTO.getCliente());
-			PedidoProduto pedidoProduto = new PedidoProduto(pedido, pedidoDTO.getProduto(), pedidoDTO.getQuantidade());
+			Pedido pedido = new Pedido(clienteRepo.findById(pedidoDTO.getIdCliente()).get());
+			Produto produto = produtoRepo.findById(pedidoDTO.getIdProduto()).get();
+			PedidoProduto pedidoProduto = new PedidoProduto(pedido, produto, pedidoDTO.getQuantidade());
 			pedido.getPedidoProdutos().add(pedidoProduto);
-			pedido.setValorTotal(precoPedido(pedidoDTO.getCliente()));
+			pedido.setValorTotal(precoPedido(clienteRepo.findById(pedidoDTO.getIdCliente()).get()));
+			produto.setEstoque(produto.getEstoque() - pedidoDTO.getQuantidade());
+			produtoRepo.save(produto);
 			pedidoRepo.save(pedido);
 			return ResponseEntity.ok(pedido);
 		} else {
-			PedidoProduto pedidoProduto = new PedidoProduto(pedidoExistente, pedidoDTO.getProduto(),
-					pedidoDTO.getQuantidade());
+			Produto produto = produtoRepo.findById(pedidoDTO.getIdProduto()).get();
+			PedidoProduto pedidoProduto = new PedidoProduto(pedidoExistente, produto, pedidoDTO.getQuantidade());
 			pedidoExistente.getPedidoProdutos().add(pedidoProduto);
-			pedidoExistente.setValorTotal(precoPedido(pedidoDTO.getCliente()));
+			pedidoExistente.setValorTotal(precoPedido(clienteRepo.findById(pedidoDTO.getIdCliente()).get()));
+			produto.setEstoque(produto.getEstoque() - pedidoDTO.getQuantidade());
+			produtoRepo.save(produto);
 			pedidoRepo.save(pedidoExistente);
 			return ResponseEntity.ok(pedidoExistente);
 		}
