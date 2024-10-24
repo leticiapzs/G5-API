@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,15 +40,11 @@ public class LojaService {
 	@Autowired
 	FotoService fotoService;
 
-	@SuppressWarnings({ "null", "unused" })
 	public ResponseEntity<?> getAllLojas() {
-		List<LojaResponseDTO> lista = null;
+		List<LojaResponseDTO> lista = new ArrayList<LojaResponseDTO>();
 		for (Loja loja : lojaRepository.findAll()) {
 			lista.add(loja.toResponseDTO());
 		}
-		if (lista == null) {
-			return ResponseEntity.notFound().build();
-		} 
 		return ResponseEntity.ok(lista);
 	}
 

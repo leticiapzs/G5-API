@@ -1,7 +1,6 @@
 package br.com.grupo5.trabalho_final.security.controllers;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +28,7 @@ public class LojaController {
 	private LojaService lojaService;
 
 	@GetMapping
-	public List<Loja> getAllLojas() {
+	public ResponseEntity<?> getAllLojas() {
 		return lojaService.getAllLojas();
 
 	}
@@ -45,8 +44,8 @@ public class LojaController {
 	}
 
 	@PostMapping("/cadastro")
-
-	public ResponseEntity<?> cadastroLoja(@RequestPart LojaRequestDTO lojadto, @RequestPart MultipartFile foto) throws IOException {
+	public ResponseEntity<?> cadastroLoja(@RequestPart LojaRequestDTO lojadto, @RequestPart MultipartFile foto)
+			throws IOException {
 		return lojaService.cadastrarLoja(lojadto, foto);
 
 	}
@@ -60,7 +59,7 @@ public class LojaController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao excluir objeto.");
 		}
 	}
-	
+
 	@PutMapping("/alterar-loja/")
 	public ResponseEntity<?> alteraLoja(@PathVariable String cnpj, @RequestBody LojaPutRequestDTO lojadto) {
 		return lojaService.alterarLoja(cnpj, lojadto);
