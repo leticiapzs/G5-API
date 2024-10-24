@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import br.com.grupo5.trabalho_final.security.dto.CupomRequestDTO;
-import br.com.grupo5.trabalho_final.security.dto.ProdutoRequestDTO;
 import br.com.grupo5.trabalho_final.security.entities.Cupom;
-import br.com.grupo5.trabalho_final.security.entities.Produto;
 import br.com.grupo5.trabalho_final.security.repositories.CupomRepository;
 
 public class CupomService {

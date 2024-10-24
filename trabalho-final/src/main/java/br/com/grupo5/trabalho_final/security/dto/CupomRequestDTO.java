@@ -4,7 +4,7 @@ public class CupomRequestDTO {
 
 	 private Integer desconto;
 	 
-	 private Integer codigo;
+	 private String codigo;
 	 
 	 private boolean boolean_ativo;
 	 
@@ -12,7 +12,7 @@ public class CupomRequestDTO {
 
 	  }
 	 
-	 public CupomRequestDTO(Integer desconto, Integer codigo, boolean boolean_ativo) {
+	 public CupomRequestDTO(Integer desconto, String codigo, boolean boolean_ativo) {
 		 
 		 this.desconto = desconto;
 		 
@@ -29,11 +29,11 @@ public class CupomRequestDTO {
 		this.desconto = desconto;
 	}
 
-	public Integer getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 

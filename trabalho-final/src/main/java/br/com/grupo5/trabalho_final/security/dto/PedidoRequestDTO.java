@@ -4,13 +4,8 @@ public class PedidoRequestDTO {
 
 	private Integer idProduto;
 
-<<<<<<< Updated upstream
-	private Cliente cliente;
-
-=======
 	private Integer idCliente;
 	
->>>>>>> Stashed changes
 	private Integer quantidade;
 
 	public PedidoRequestDTO() {
@@ -46,16 +41,6 @@ public class PedidoRequestDTO {
 		this.quantidade = quantidade;
 	}
 
-<<<<<<< Updated upstream
-	public Produto getProduto() {
-		return produto;
-	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
-=======
-	
->>>>>>> Stashed changes
 
 }

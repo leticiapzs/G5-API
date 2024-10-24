@@ -79,7 +79,7 @@ public class PedidoService {
 	public ResponseEntity<?> updatePedidoById(Integer id, PedidoRequestDTO pedidoDTO) {
 		Pedido pedido = pedidoRepo.findById(id).get();
 		if (pedido != null) {
-			PedidoProduto pedidoProduto = new PedidoProduto(pedido, pedidoDTO.getProduto(), pedidoDTO.getQuantidade());
+			PedidoProduto pedidoProduto = new PedidoProduto(pedido, produtoRepo.findById(pedidoDTO.getIdProduto()).get(), pedidoDTO.getQuantidade());
 			pedido.getPedidoProdutos().add(pedidoProduto);
 			pedido.setValorTotal(precoPedido(pedido.getCliente()));
 			pedidoRepo.save(pedido);
