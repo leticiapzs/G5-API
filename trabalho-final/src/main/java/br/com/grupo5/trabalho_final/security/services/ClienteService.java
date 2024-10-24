@@ -35,6 +35,9 @@ public class ClienteService {
 	@Autowired
 	EnderecoRepository enderecoRepository;
 	
+	@Autowired
+	EmailService emailService;
+	
 	public List<ClienteResponseDTO> allClients() {
 		List<ClienteResponseDTO> listaDTO = new ArrayList<ClienteResponseDTO>();
 		for (Cliente cliente : clienteRepo.findAll()) {
@@ -81,6 +84,7 @@ public class ClienteService {
 		cliente.setUser(user);
 		cliente.setDataDeNascimento(clienteDTO.getDataDeNascimento());
 		clienteRepo.save(cliente);
+		emailService.mailCadastroCliente(cliente);
 
 		return ResponseEntity.ok(new MessageResponseDTO("Cliente cadastrado com sucesso."));
 	}

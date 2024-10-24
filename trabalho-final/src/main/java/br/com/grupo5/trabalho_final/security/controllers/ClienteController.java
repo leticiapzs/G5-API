@@ -56,7 +56,7 @@ public class ClienteController {
 		}
 	}
 
-	@PutMapping("/alterar-loja/")
+	@PutMapping("/alterar-cliente/")
 	public ResponseEntity<?> alteraLoja(@PathVariable String cpf, @RequestBody ClientePutRequestDTO clientedto) {
 		return clienteService.alterarCliente(cpf, clientedto);
 	}

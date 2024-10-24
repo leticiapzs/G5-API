@@ -36,6 +36,9 @@ public class LojaService {
 
 	@Autowired
 	EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	EmailService emailService;
 
 	@Autowired
 	FotoService fotoService;
@@ -80,6 +83,7 @@ public class LojaService {
 		loja.setFkUser(user);
 		lojaRepository.save(loja);
 		fotoService.cadastrarFoto(foto, loja);
+		emailService.mailCadastroLoja(loja);
 
 		return ResponseEntity.ok(new MessageResponseDTO("Loja cadastrada com sucesso"));
 	}

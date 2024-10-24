@@ -38,7 +38,7 @@ public class LojaController {
 
 	}
 
-	@GetMapping("/{id}/loja-foto")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> getLojaById(@PathVariable Integer id) {
 		try {
 			Loja loja = lojaService.getLojaById(id);

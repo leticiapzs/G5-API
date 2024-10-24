@@ -1,6 +1,5 @@
 package br.com.grupo5.trabalho_final.security.services;
 
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
@@ -10,11 +9,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import br.com.grupo5.trabalho_final.security.entities.Cliente;
+import br.com.grupo5.trabalho_final.security.entities.Loja;
 
 @Component
 public class EmailService {
@@ -49,15 +47,53 @@ public class EmailService {
 		return mailSender;
 	}
 
-	public String mailWriter() {
+	public String mailCadastroLoja(Loja loja) {
 		LocalDateTime currentTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm");
 
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-		mailMessage.setTo("diogoportelladantas1234@gmail.com");
-		mailMessage.setSubject("Não é spam");
-		mailMessage.setText("Era Spam.<br>Boa sorte na próxima." + currentTime.format(formatter));
+		mailMessage.setTo("debsdebbie90@gmail.com");
+		mailMessage.setSubject("Parabéns por cadastrar sua loja!");
+		mailMessage.setText("Que bom ter você por aqui!\n"
+				+ "Seu cadastro foi realizado com sucesso.\n"
+				+ "Veja as suas informações para não esquecer de nada:\n\n"
+				+ " - Nome de usuário: " + loja.getFkUser().getUsername()
+				+ "\n - E-mail: " + loja.getFkUser().getEmail()
+				+ "\n - Nome fantasia: " + loja.getNomeFantasia()
+				+ "\n - CNPJ: " + loja.getCnpj()
+				+ "\n\nAgradecemos o seu cadastro e damos a você as boas vindas!"
+				+ "\nUse a conta que acabou de cadastrar para cadastrar os produtos em sua loja, não perca tempo!"
+				+ "\n\n\nAtenciosamente,\nEquipe ShopHub.\n"
+				+ currentTime.format(formatter));
+
+		try {
+			javaMailSender.send(mailMessage);
+			return "E-mail enviado com sucesso";
+		} catch (Exception e) {
+			return "Erro ao enviar o e-mail" + e.getMessage();
+		}
+	}
+	
+	public String mailCadastroCliente(Cliente cliente) {
+		LocalDateTime currentTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm");
+
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+
+		mailMessage.setTo("debsdebbie90@gmail.com");
+		mailMessage.setSubject("Boas vindas ao ShopHub!");
+		mailMessage.setText("Que bom ter você por aqui!\n"
+				+ "Seu cadastro foi realizado com sucesso.\n"
+				+ "Veja as suas informações para não esquecer de nada:\n\n"
+				+ " - Nome de usuário: " + cliente.getUser().getUsername()
+				+ "\n - E-mail: " + cliente.getUser().getEmail()
+				+ "\n - Nome: " + cliente.getNomeCompleto()
+				+ "\n - CPF: " + cliente.getCpf()
+				+ "\n\nAgradecemos o seu cadastro e damos a você as boas vindas!"
+				+ "\nAproveite que está tudo certinho e vá agora mesmo aproveitar as incríveis ofertas em nossa plataforma!"
+				+ "\n\n\nAtenciosamente,\nEquipe ShopHub.\n\n\n"
+				+ currentTime.format(formatter));
 
 		try {
 			javaMailSender.send(mailMessage);
@@ -67,60 +103,5 @@ public class EmailService {
 		}
 	}
 
-	public String mailWriterComplex() {
-		LocalDateTime currentTime = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm");
-
-		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-
-		try {
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-			helper.setSubject("Pode abrir, não tem nada esquisito aqui não.");
-			helper.setTo("diogoportelladantas1234@gmail.com");
-
-			String emailBody = "<h1>Ta merecendo todos os emails!</h1>"
-					+ "<p>Olá! <br>Você está participando de um teste.<br> Obrigado.<br><br><br></p>"
-					+ currentTime.format(formatter) + "</p>";
-
-			helper.setText(emailBody, true);
-			javaMailSender.send(mimeMessage);
-			return "E-mail enviado com sucesso";
-		} catch (MessagingException e) {
-			return "Falha ao enviar o e-mail" + e.getMessage();
-		}
-	}
-
-	public void mailSend() {
-		LocalDateTime currentTime = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm");
-		DecimalFormat df = new DecimalFormat("R$ #,##0.00");
-		MimeMessage message = javaMailSender.createMimeMessage();
-		try {
-		MimeMessageHelper helper = new MimeMessageHelper(message, true);
-		helper.setSubject("Boa noite");
-		helper.setTo("diogoportelladantas1234@gmail.com");
-		
-		StringBuilder sBuilder = new StringBuilder();
-		sBuilder.append("<html>\r\n");
-		sBuilder.append("	<body>\r\n");
-		sBuilder.append(currentTime.format(formatter));
-		sBuilder.append("		<div align:\" center\">\r\n");
-		sBuilder.append("			<p>Aula</p>\r\n");
-		sBuilder.append("		</div>\r\n");
-		sBuilder.append("		<br>\r\n");
-		sBuilder.append("		<table border ='2' cellpadding = '2'>\r\n");
-		sBuilder.append("			<tr><th>Nome</th><th>Preço</th></tr>\r\n");
-		sBuilder.append("			<tr><td>Chiclete mastigado</td><td>" + df.format(1.99) + "</td></tr>\r\n" );
-		sBuilder.append("		</table>\r\n");
-		sBuilder.append("	</body>\r\n");
-		sBuilder.append("</hmtl>");
-		
-		helper.setText(sBuilder.toString(), true);
-		
-		javaMailSender.send(message);
-		
-		} catch (MessagingException e) {
-			System.out.println("Erro ao enviar e-mail" + e.getMessage());
-		}
-	}
+	
 }
