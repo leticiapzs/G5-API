@@ -66,6 +66,18 @@ public class PedidoService {
 		}
 	}
 
+	public ResponseEntity<?> updatePedidoById(Integer id, PedidoRequestDTO pedidoDTO) {
+		Pedido pedido = pedidoRepo.findById(id).get();
+		if (pedido != null) {
+			PedidoProduto pedidoProduto = new PedidoProduto(pedido, pedidoDTO.getProduto(), pedidoDTO.getQuantidade());
+			pedido.getPedidoProdutos().add(pedidoProduto);
+			pedido.setValorTotal(precoPedido(pedido.getCliente()));
+			pedidoRepo.save(pedido);
+			return ResponseEntity.ok(pedido);
+		}
+		return ResponseEntity.badRequest().body("Pedido não encontrado.");
+	}
+
 	public boolean pedidoDelete(Integer id) {
 		Pedido pedido = pedidoRepo.findById(id).get();
 		if (pedido != null) {

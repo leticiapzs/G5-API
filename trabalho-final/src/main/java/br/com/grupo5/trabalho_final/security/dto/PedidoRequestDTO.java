@@ -8,9 +8,9 @@ public class PedidoRequestDTO {
 	private Produto produto;
 
 	private Cliente cliente;
-	
+
 	private Integer quantidade;
-	
+
 	public PedidoRequestDTO() {
 	}
 
@@ -42,6 +42,6 @@ public class PedidoRequestDTO {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
-	}	
+	}
 
 }

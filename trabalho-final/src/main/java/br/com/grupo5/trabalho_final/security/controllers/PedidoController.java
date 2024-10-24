@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.grupo5.trabalho_final.security.dto.PedidoRequestDTO;
 import br.com.grupo5.trabalho_final.security.services.PedidoService;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/pedido")
@@ -31,8 +33,13 @@ public class PedidoController {
   }
 
   @PostMapping("/novo-pedido")
-  public ResponseEntity<?> novoPedido(Integer id, PedidoRequestDTO pedidoDTO) {
+  public ResponseEntity<?> novoPedido(PedidoRequestDTO pedidoDTO) {
     return pedidoService.adicionarProduto(pedidoDTO);
+  }
+
+  @PutMapping("/update-pedido/{id}")
+  public ResponseEntity<?> updatePedidoById(@RequestParam Integer id, @RequestBody PedidoRequestDTO pedidoDTO) {
+    return pedidoService.updatePedidoById(id, pedidoDTO);
   }
 
   @DeleteMapping("/delete-pedido/{id}")
