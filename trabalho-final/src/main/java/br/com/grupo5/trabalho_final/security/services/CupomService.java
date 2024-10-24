@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.example.atores.security.dto.SeriesResponseDTO;
 import br.com.example.atores.security.entities.Series;
 import br.com.grupo5.trabalho_final.security.dto.CupomRequestDTO;
+<<<<<<< HEAD
 import br.com.grupo5.trabalho_final.security.dto.CupomResponseDTO;
+=======
+>>>>>>> 4f8892e6e971dcccf1a9ec5efaf167732661a63c
 import br.com.grupo5.trabalho_final.security.entities.Cupom;
 import br.com.grupo5.trabalho_final.security.repositories.CupomRepository;
 

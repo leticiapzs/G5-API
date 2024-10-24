@@ -3,6 +3,7 @@ package br.com.grupo5.trabalho_final.security.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import br.com.grupo5.trabalho_final.security.dto.ClienteResponseDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -99,6 +100,11 @@ public class Cliente {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	
+	public ClienteResponseDTO toResponseDTO () {
+		return new ClienteResponseDTO(this.nomeCompleto, this.cpf, this.dataDeNascimento, this.user.getUsername(), this.user.getEmail(), this.fkEndereco);
 	}
 
 }
