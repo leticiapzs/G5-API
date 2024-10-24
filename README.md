@@ -1,8 +1,9 @@
-# Índice
+# 📚 Índice
 
-* Sobre o Projeto
-* Tecnologias utilizadas
-* Autores do Projeto
+* [Sobre o Projeto](#sobre-o-projeto)
+* [Funcionalidades do Sistema](#funcionalidades-do-sistema)
+* [Tecnologias utilizadas](#tecnologias-utilizadas)
+* [Autores do Projeto](#autores)
 
 
 ## Sobre o Projeto
