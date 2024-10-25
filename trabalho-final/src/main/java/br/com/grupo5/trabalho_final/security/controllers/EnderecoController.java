@@ -26,21 +26,21 @@ public class EnderecoController {
 	EnderecoService enderecoService;
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('USER', 'MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
 	@PostMapping("/adicionando-endereco")
 	public EnderecoResponseDTO cadastrarEndereco(@RequestBody EnderecoRequestDTO enderecoDto) {
 		return enderecoService.cadastrarEndereco(enderecoDto);
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('USER', 'MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
 	@GetMapping("/buscando-endereco/{id}")
 	public EnderecoResponseDTO buscarEndereco(@PathVariable Integer id) {
 		return enderecoService.buscarEndereco(id);
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('USER', 'MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
 	@DeleteMapping("/deletando-endereco/{id}")
 	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
 		boolean resultDelete = enderecoService.enderecoDelete(id);
@@ -53,7 +53,7 @@ public class EnderecoController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('USER', 'MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
 	@PutMapping("/alterando-endereco/{id}")
 	public String alteracaoEndereco(@PathVariable Integer id, @RequestBody EnderecoResponseDTO endereco) {
 		return enderecoService.alteracaoEndereco(id, endereco);

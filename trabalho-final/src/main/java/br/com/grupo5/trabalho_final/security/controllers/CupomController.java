@@ -30,7 +30,7 @@ public class CupomController {
 	CupomService cupomService;
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('MODERATOR', 'ADMIN')")
 	@PostMapping("/adicionando-cupom")
 	public ResponseEntity<?> createCupom(@RequestBody CupomRequestDTO cupomDto) {
 		cupomService.createCupom(cupomDto);
@@ -38,14 +38,14 @@ public class CupomController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('MODERATOR', 'ADMIN')")
 	@GetMapping("/listando-cupom")
 	public List<Cupom> listCupom() {
 		return cupomService.cupomList();
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('MODERATOR', 'ADMIN')")
 	@DeleteMapping("/deletando-cupom/{id}")
 	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
 		boolean resultDelete = cupomService.cupomDelete(id);
@@ -57,7 +57,7 @@ public class CupomController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('MODERATOR', 'ADMIN')")
 	@PutMapping("/atualizando-cupom/{id}")
 	public String alterandoCupom(@PathVariable Integer id, @RequestBody CupomResponseDTO cupom) {
 		return cupomService.alterandoCupom(id, cupom);

@@ -34,8 +34,8 @@ public class CategoriaController {
     return categoriaService.getAllCategorias();
   }
 
-  // @SecurityRequirement(name = "Bearer Auth")
-  // @PreAuthorize("hasRole('ADMIN')")
+  @SecurityRequirement(name = "Bearer Auth")
+  @PreAuthorize("hasRole('ADMIN')")
   @PostMapping("/create")
   public ResponseEntity<?> createCategory(@RequestBody CategoriaRequestDTO categoriaRequestDTO) {
     return categoriaService.createCategory(categoriaRequestDTO);
@@ -57,7 +57,7 @@ public class CategoriaController {
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasRole('USER', 'MOD', 'ADMIN')")
+  @PreAuthorize("hasRole('USER', 'MODERATOR', 'ADMIN')")
   @GetMapping("/{id}")
   public CategoriaRequestDTO getCategoryById(@RequestParam Integer id) {
     return categoriaService.getCategoryById(id);

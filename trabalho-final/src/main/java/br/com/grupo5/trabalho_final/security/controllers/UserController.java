@@ -36,20 +36,20 @@ public class UserController {
 
   @GetMapping("/{id}")
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasRole('USER', 'MOD')")
+  @PreAuthorize("hasRole('USER', 'MODERATOR')")
   public UserResponseDTO findUserById(@RequestParam Integer id) {
     return userService.findUserById(id);
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MOD')")
+  @PreAuthorize("hasAnyRole('USER', 'MODERATOR')")
   @DeleteMapping("/{id}")
   public String deleteUserById(@PathVariable Integer id) {
     return userService.deleteUserById(id);
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MOD')")
+  @PreAuthorize("hasAnyRole('USER', 'MODERATOR')")
   @PutMapping("/{id}")
   public String updateUserById(@PathVariable Integer id, @RequestBody UserRequestDTO user) {
     return userService.updateUserById(id, user);

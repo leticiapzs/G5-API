@@ -26,35 +26,35 @@ public class PedidoController {
   private PedidoService pedidoService;
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MOD')")
+  @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
   @GetMapping("/lista-pedidos/{id}")
   public ResponseEntity<?> getAllPedidos(@RequestParam Integer id) {
     return pedidoService.getAllPedidos(id);
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MOD')")
+  @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
   @GetMapping("/lista-produtos/{id}")
   public String listaProduto(@RequestParam Integer id) {
     return pedidoService.listaProdutos(id);
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MOD')")
+  @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
   @PostMapping("/novo-pedido")
   public ResponseEntity<?> novoPedido(PedidoRequestDTO pedidoDTO) {
     return pedidoService.adicionarProduto(pedidoDTO);
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MOD')")
+  @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
   @PutMapping("/update-pedido/{id}")
   public ResponseEntity<?> updatePedidoById(@RequestParam Integer id, @RequestBody PedidoRequestDTO pedidoDTO) {
     return pedidoService.updatePedidoById(id, pedidoDTO);
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MOD')")
+  @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
   @DeleteMapping("/delete-pedido/{id}")
   public ResponseEntity<String> deletarPedido(@RequestParam Integer id) {
     boolean resultDelete = pedidoService.pedidoDelete(id);

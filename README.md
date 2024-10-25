@@ -15,14 +15,17 @@ O ShopHub API foi desenvolvido com o intuito de criar uma plataforma eficiente e
 1. *Sistema de Autenticação*
    - Permite criar contas de usuário cliente e loja. Realiza login com as credenciais corretas.
 
-3. *Sistema de Cadastro*
+2. *Sistema de Cadastro*
    - Duas rotas separadas para o cadastro de lojas e cadastro de clientes.
 
-4. *Sistema de Autenticação Users*
-   - Permite o gerenciamento de usuários, incluindo criação, atualização .
+3. *Sistema de Autenticação Users*
+   - Permite o gerenciamento de usuários, incluindo criação e atualização.
 
-6. *Classe CheckEntries*
-   - Verifica entradas em um arquivo de texto e calcula o próximo índice disponível.
+4. *Sistema de criação de produtos*
+   - Permite as lojas criar seus produtos e inserir em alguma categoria
+
+5. *Sistema de criação de pedidos*
+   - Permite ao cliente ou loja criar pedidos selecionando produtos e alterá-los.
 
 
 ### Funcionalidades por nível de autorização
@@ -42,6 +45,15 @@ O ShopHub API foi desenvolvido com o intuito de criar uma plataforma eficiente e
    - Consulta de produto pelo id
    - Exclusão de produtos pelo id
    - Criação de produtos com o id da loja
+   - Consulta de pedido pelo id do cliente
+   - Consulta de produtos do último pedido do cliente
+   - Adiciona produto ao pedido do cliente
+   - Alteração do último pedido do cliente pelo seu id
+   - Exclusão do pedido pelo 
+   - Criação de cupom
+   - Consulta de lista de cupons
+   - Exclusão de 
+   - Alteração de cupom
 
 3. *Cliente*
    - Consulta de loja pelo 
@@ -49,6 +61,12 @@ O ShopHub API foi desenvolvido com o intuito de criar uma plataforma eficiente e
    - Exclusão de cliente pelo id
    - Alteração de dados do cliente pelo cpf
    - Consulta de produto pelo id
+   - Consulta de pedido pelo id do cliente
+   - Consulta de produtos do último pedido do cliente
+   - Adiciona produto ao pedido do cliente
+   - Alteração do último pedido do cliente pelo seu 
+   - Exclusão do pedido pelo 
+   -
 
 4. *Admin*
    - Consulta de loja pelo id
@@ -56,7 +74,16 @@ O ShopHub API foi desenvolvido com o intuito de criar uma plataforma eficiente e
    - Consulta de todos os clientes
    - Consulta de cliente pelo id
    - Exclusão de cliente pelo id
-   - Alteração de dados do cliente pelo cpf
+   - Alteração de dados do cliente pelo 
+   - Consulta de pedido pelo id do cliente
+   - Consulta de produtos do último pedido do cliente
+   - Adiciona produto ao pedido do cliente
+   - Alteração do último pedido do cliente pelo seu id
+   - Exclusão do pedido pelo 
+   - Criação de cupom
+   - Consulta de lista de cupons
+   - Exclusão de 
+   - Alteração de cupom
 
 O projeto foi realizado durante o período aproximado de 2 semanas, durante a disciplina de API Restful em TIC/Software do Serratec.
 
