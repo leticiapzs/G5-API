@@ -42,13 +42,13 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/auth/**", "/roles/**", "/test/**",
 								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**",
-								"/cliente/cadastro/**", "/loja/cadastro/**", "/loja/all-lojas**")
+								"/cliente/cadastro/**", "/loja/cadastro/**", "/loja/all-lojas**", "/produto/all/**", "/categoria/**")
 						.permitAll()
 						.requestMatchers("/loja/{id}/**", "/cliente/{id}/**").hasAnyRole("USER", "MODERATOR", "ADMIN")
 						.requestMatchers("/loja/delete-id/{id}/**").hasAnyRole("MODERATOR", "ADMIN")
 						.requestMatchers("/cliente/delete-id/{id}", "/alterar-cliente/{cpf}").hasAnyRole("USER", "ADMIN")
-						.requestMatchers("/pedido/**").hasAnyRole("USER", "MODERATOR")
-						.requestMatchers("/test/mod/**", "/loja/alterar-loja/{cnpj}").hasRole("MODERATOR")
+						.requestMatchers("/produto/{id}/**").hasAnyRole("USER", "MODERATOR")
+						.requestMatchers("/test/mod/**", "/loja/alterar-loja/{cnpj}", "/product/create/**", "/delete-id/{id}/**").hasRole("MODERATOR")
 						.requestMatchers("/user/**").hasRole("USER")
 						.requestMatchers("/test/admin/**", "/cliente/all-clientes/**").hasRole("ADMIN")
 						.anyRequest().authenticated());
