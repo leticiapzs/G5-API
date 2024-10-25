@@ -40,21 +40,18 @@ public class WebSecurityConfig {
 				.exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandler))
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/g6/**", "/auth/**", "/h2-console/**", "/roles/**", "/test/all/**",
-								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**", "user/**", "/cliente/**", "/produto/**",
-								"/endereco/**", "/adicionando-endereco/**", "/buscando-endereco/{id}/**", "/deletando-endereco/{id}/**",
-								"/pedido/**", "/loja/**", "/cadastro/**", "/categoria/**", "/{id}/foto/**")
+						.requestMatchers("/auth/**", "/roles/**", "/test/all/**",
+								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**",
+								"/cliente/cadastro/**", "/loja/cadastro/**")
 						.permitAll()
-						.requestMatchers("/cupom/**").hasAnyRole("MOD", "ADMIN")
-						.requestMatchers("/endereco/**").hasAnyRole("USER", "MOD", "ADMIN")
-						.requestMatchers("/produto/**").hasAnyRole("USER", "MOD", "ADMIN")
-						.requestMatchers("/pedido/**").hasAnyRole("USER", "MOD", "ADMIN")
-						.requestMatchers("/loja/**").hasAnyRole("USER", "MOD", "ADMIN")
-						.requestMatchers("/user/**").hasAnyRole("USER")
-						.requestMatchers("/test/user/**").hasAnyRole("USER", "ADMIN")
+						.requestMatchers("/loja/**", "/{id}/**").hasAnyRole("USER", "MOD", "ADMIN")
+						.requestMatchers("/endereco/**").hasAnyRole("MOD", "ADMIN")
+						.requestMatchers("/produto/**").hasAnyRole("USER", "ADMIN")
+						.requestMatchers("/pedido/**").hasAnyRole("USER", "MOD")
+						.requestMatchers("/test/mod/**").hasRole("MOD")
+						.requestMatchers("/user/**").hasRole("USER")
 						.requestMatchers("/test/admin/**").hasRole("ADMIN")
 						.anyRequest().authenticated());
-
 		http.authenticationProvider(authenticationProvider());
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

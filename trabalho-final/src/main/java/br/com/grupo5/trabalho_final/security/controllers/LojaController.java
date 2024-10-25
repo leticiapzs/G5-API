@@ -62,7 +62,7 @@ public class LojaController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('USER', 'MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('MOD', 'ADMIN')")
 	@DeleteMapping("/deleteId/{id}")
 	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
 		boolean resultDelete = lojaService.lojaDelete(id);
@@ -75,7 +75,7 @@ public class LojaController {
 
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('MOD')")
-	@PutMapping("/alterar-loja/")
+	@PutMapping("/alterar-loja/{cnpj}")
 	public ResponseEntity<?> alteraLoja(@PathVariable String cnpj, @RequestBody LojaPutRequestDTO lojadto) {
 		return lojaService.alterarLoja(cnpj, lojadto);
 	}
