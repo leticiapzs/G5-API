@@ -34,16 +34,14 @@ public class LojaController {
 	@Autowired
 	FotoService fotoService;
 
-	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping
+	@GetMapping("/all-lojas")
 	public ResponseEntity<?> getAllLojas() {
 		return lojaService.getAllLojas();
 
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('USER', 'MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getLojaById(@PathVariable Integer id) {
 		try {
@@ -62,8 +60,8 @@ public class LojaController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('MOD', 'ADMIN')")
-	@DeleteMapping("/deleteId/{id}")
+	@PreAuthorize("hasAnyRole('MODERATOR', 'ADMIN')")
+	@DeleteMapping("/delete-id/{id}")
 	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
 		boolean resultDelete = lojaService.lojaDelete(id);
 		if (resultDelete) {
@@ -74,14 +72,12 @@ public class LojaController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('MOD')")
+	@PreAuthorize("hasRole('MODERATOR')")
 	@PutMapping("/alterar-loja/{cnpj}")
 	public ResponseEntity<?> alteraLoja(@PathVariable String cnpj, @RequestBody LojaPutRequestDTO lojadto) {
 		return lojaService.alterarLoja(cnpj, lojadto);
 	}
 
-	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('USER', 'MOD')")
 	@GetMapping("/{idLoja}/foto")
 	public ResponseEntity<byte[]> retornoDaFoto(@PathVariable Integer idLoja) throws Exception {
 		byte[] foto = fotoService.getFoto(idLoja);

@@ -42,13 +42,13 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/auth/**", "/roles/**", "/test/**",
 								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**",
-								"/cliente/cadastro/**", "/loja/cadastro/**")
+								"/cliente/cadastro/**", "/loja/cadastro/**", "/loja/all-lojas**")
 						.permitAll()
-						.requestMatchers("/loja/**", "/{id}/**").hasAnyRole("USER", "MOD", "ADMIN")
-						.requestMatchers("/endereco/**").hasAnyRole("MOD", "ADMIN")
+						.requestMatchers("loja/{id}/**").hasAnyRole("USER", "MODERATOR", "ADMIN")
+						.requestMatchers("loja/delete-id/{id}/**").hasAnyRole("MODERATOR", "ADMIN")
 						.requestMatchers("/produto/**").hasAnyRole("USER", "ADMIN")
-						.requestMatchers("/pedido/**").hasAnyRole("USER", "MOD")
-						.requestMatchers("/test/mod/**").hasRole("MOD")
+						.requestMatchers("/pedido/**").hasAnyRole("USER", "MODERATOR")
+						.requestMatchers("/test/mod/**", "/loja/alterar-loja/{cnpj}").hasRole("MODERATOR")
 						.requestMatchers("/user/**").hasRole("USER")
 						.requestMatchers("/test/admin/**").hasRole("ADMIN")
 						.anyRequest().authenticated());

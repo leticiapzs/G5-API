@@ -26,7 +26,7 @@ public class TestController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('MOD')")
+	@PreAuthorize("hasRole('MODERATOR')")
 	@GetMapping("/mod")
 	public String moderatorAccess() {
 		return "Moderator Board.";

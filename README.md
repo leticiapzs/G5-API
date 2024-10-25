@@ -30,9 +30,20 @@ O ShopHub API foi desenvolvido com o intuito de criar uma plataforma eficiente e
 1. *Livre*
    - Cadastro de clientes
    - Cadastro de lojas
+   - Consulta de todas as lojas
+   - Visualização de foto de loja cadastrada
 
 2. *Loja*
-   -
+   - Consulta de loja pelo id
+   - Exclusão da loja pelo id
+   - Alteração dados da  pelo cnpj
+
+3. *Cliente*
+      - Consulta de loja pelo id
+
+4. *Admin*
+      - Consulta de loja pelo id
+      - Exclusão de loja pelo id
 
 
 
