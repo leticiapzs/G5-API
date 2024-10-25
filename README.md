@@ -52,7 +52,7 @@ O ShopHub API foi desenvolvido com o intuito de criar uma plataforma eficiente e
    - Exclusão do pedido pelo 
    - Criação de cupom
    - Consulta de lista de cupons
-   - Exclusão de 
+   - Exclusão de cupons
    - Alteração de cupom
 
 3. *Cliente*
@@ -66,7 +66,6 @@ O ShopHub API foi desenvolvido com o intuito de criar uma plataforma eficiente e
    - Adiciona produto ao pedido do cliente
    - Alteração do último pedido do cliente pelo seu 
    - Exclusão do pedido pelo 
-   -
 
 4. *Admin*
    - Consulta de loja pelo id
@@ -74,7 +73,7 @@ O ShopHub API foi desenvolvido com o intuito de criar uma plataforma eficiente e
    - Consulta de todos os clientes
    - Consulta de cliente pelo id
    - Exclusão de cliente pelo id
-   - Alteração de dados do cliente pelo 
+   - Alteração de dados do cliente pelo cpf
    - Consulta de pedido pelo id do cliente
    - Consulta de produtos do último pedido do cliente
    - Adiciona produto ao pedido do cliente
@@ -82,7 +81,7 @@ O ShopHub API foi desenvolvido com o intuito de criar uma plataforma eficiente e
    - Exclusão do pedido pelo 
    - Criação de cupom
    - Consulta de lista de cupons
-   - Exclusão de 
+   - Exclusão de cupons
    - Alteração de cupom
 
 O projeto foi realizado durante o período aproximado de 2 semanas, durante a disciplina de API Restful em TIC/Software do Serratec.
