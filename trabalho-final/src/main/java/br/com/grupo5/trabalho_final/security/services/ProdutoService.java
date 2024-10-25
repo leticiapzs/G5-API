@@ -1,6 +1,7 @@
 package br.com.grupo5.trabalho_final.security.services;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,10 @@ public class ProdutoService {
 
 	@Autowired
 	private LojaRepository lojaRepository;
+
+	public List<Produto> getAllProducts() {
+		return produtoRepository.findAll();
+	}
 
 	public ResponseEntity<?> getProductById(Integer id) {
 		if (!produtoRepository.existsById(id)) {

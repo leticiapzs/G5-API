@@ -1,5 +1,7 @@
 package br.com.grupo5.trabalho_final.security.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.grupo5.trabalho_final.security.dto.ProdutoRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.ProdutoResponseDTO;
+import br.com.grupo5.trabalho_final.security.entities.Produto;
 import br.com.grupo5.trabalho_final.security.services.ProdutoService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
@@ -27,29 +30,27 @@ public class ProdutoController {
   @Autowired
   private ProdutoService produtoService;
 
-  @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasRole('ADMIN')")
-  @GetMapping
-  public String getAllProducts() {
-    return "All Products";
+  @GetMapping("/all")
+  public List<Produto> getAllProducts() {
+    return produtoService.getAllProducts();
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MOD')")
+  @PreAuthorize("hasAnyRole('USER', 'MODERATOR')")
   @GetMapping("/{id}")
   public ResponseEntity<?> getProductById(@RequestParam Integer id) {
     return produtoService.getProductById(id);
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasRole('MOD')")
+  @PreAuthorize("hasRole('MODERATOR')")
   @PostMapping("/create")
   public ResponseEntity<?> createProduct(@RequestBody ProdutoRequestDTO produtoRequestDTO) {
     return produtoService.createProduct(produtoRequestDTO);
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasRole('MOD')")
+  @PreAuthorize("hasRole('MODERATOR')")
   @PutMapping("/{id}")
   public ResponseEntity<?> updateProductById(@PathVariable Integer id,
       @RequestBody ProdutoResponseDTO produtoRequestDTO) {
@@ -57,8 +58,8 @@ public class ProdutoController {
   }
 
   @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasRole('MOD')")
-  @DeleteMapping("/deleteId/{id}")
+  @PreAuthorize("hasRole('MODERATOR')")
+  @DeleteMapping("/delete-id/{id}")
   public ResponseEntity<String> deleteById(@PathVariable Integer id) {
     boolean resultDelete = produtoService.deleteProductById(id);
     if (resultDelete) {
