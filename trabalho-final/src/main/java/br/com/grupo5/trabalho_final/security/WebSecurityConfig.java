@@ -44,13 +44,13 @@ public class WebSecurityConfig {
 								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**",
 								"/cliente/cadastro/**", "/loja/cadastro/**", "/loja/all-lojas**")
 						.permitAll()
-						.requestMatchers("loja/{id}/**").hasAnyRole("USER", "MODERATOR", "ADMIN")
-						.requestMatchers("loja/delete-id/{id}/**").hasAnyRole("MODERATOR", "ADMIN")
-						.requestMatchers("/produto/**").hasAnyRole("USER", "ADMIN")
+						.requestMatchers("/loja/{id}/**", "/cliente/{id}/**").hasAnyRole("USER", "MODERATOR", "ADMIN")
+						.requestMatchers("/loja/delete-id/{id}/**").hasAnyRole("MODERATOR", "ADMIN")
+						.requestMatchers("/cliente/delete-id/{id}", "/alterar-cliente/{cpf}").hasAnyRole("USER", "ADMIN")
 						.requestMatchers("/pedido/**").hasAnyRole("USER", "MODERATOR")
 						.requestMatchers("/test/mod/**", "/loja/alterar-loja/{cnpj}").hasRole("MODERATOR")
 						.requestMatchers("/user/**").hasRole("USER")
-						.requestMatchers("/test/admin/**").hasRole("ADMIN")
+						.requestMatchers("/test/admin/**", "/cliente/all-clientes/**").hasRole("ADMIN")
 						.anyRequest().authenticated());
 		http.authenticationProvider(authenticationProvider());
 

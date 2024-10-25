@@ -31,13 +31,13 @@ public class ClienteController {
 
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping
+	@GetMapping("/all-clientes")
 	public List<ClienteResponseDTO> getAllClientes() {
 		return clienteService.allClients();
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('USER','MOD', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('USER','MODERATOR', 'ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getClienteById(@PathVariable Integer id) {
 		try {
@@ -54,7 +54,7 @@ public class ClienteController {
 
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-	@DeleteMapping("/deleteId/{id}")
+	@DeleteMapping("/delete-id/{id}")
 	public ResponseEntity<String> deleteClienteById(@PathVariable Integer id) {
 		boolean resultDelete = clienteService.deleteClienteById(id);
 		if (resultDelete) {
@@ -66,7 +66,7 @@ public class ClienteController {
 
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-	@PutMapping("/alterar-cliente/")
+	@PutMapping("/alterar-cliente/{cpf}")
 	public ResponseEntity<?> updateClienteById(@PathVariable String cpf, @RequestBody ClientePutRequestDTO clientedto) {
 		return clienteService.updateClienteById(cpf, clientedto);
 	}
