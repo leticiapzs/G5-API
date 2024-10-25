@@ -40,7 +40,7 @@ public class WebSecurityConfig {
 				.exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandler))
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/auth/**", "/roles/**", "/test/all/**",
+						.requestMatchers("/auth/**", "/roles/**", "/test/**",
 								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**",
 								"/cliente/cadastro/**", "/loja/cadastro/**")
 						.permitAll()

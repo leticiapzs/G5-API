@@ -34,8 +34,7 @@ public class Loja {
 	@JoinColumn(name = "lo_fk_endereco")
 	private Endereco fkEndereco;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "lo_tx_produto")
+	@OneToMany(mappedBy = "fkLoja", cascade = CascadeType.ALL)
 	private Set<Produto> produtos = new HashSet<>();
 
 	@OneToOne(cascade = CascadeType.ALL)
