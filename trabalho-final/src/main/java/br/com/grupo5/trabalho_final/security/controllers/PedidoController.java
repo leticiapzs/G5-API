@@ -3,6 +3,7 @@ package br.com.grupo5.trabalho_final.security.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.grupo5.trabalho_final.security.dto.PedidoRequestDTO;
 import br.com.grupo5.trabalho_final.security.services.PedidoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,26 +25,36 @@ public class PedidoController {
   @Autowired
   private PedidoService pedidoService;
 
+  @SecurityRequirement(name = "Bearer Auth")
+  @PreAuthorize("hasAnyRole('USER', 'MOD')")
   @GetMapping("/lista-pedidos/{id}")
   public ResponseEntity<?> getAllPedidos(@RequestParam Integer id) {
     return pedidoService.getAllPedidos(id);
   }
 
+  @SecurityRequirement(name = "Bearer Auth")
+  @PreAuthorize("hasAnyRole('USER', 'MOD')")
   @GetMapping("/lista-produtos/{id}")
   public String listaProduto(@RequestParam Integer id) {
     return pedidoService.listaProdutos(id);
   }
 
+  @SecurityRequirement(name = "Bearer Auth")
+  @PreAuthorize("hasAnyRole('USER', 'MOD')")
   @PostMapping("/novo-pedido")
   public ResponseEntity<?> novoPedido(PedidoRequestDTO pedidoDTO) {
     return pedidoService.adicionarProduto(pedidoDTO);
   }
 
+  @SecurityRequirement(name = "Bearer Auth")
+  @PreAuthorize("hasAnyRole('USER', 'MOD')")
   @PutMapping("/update-pedido/{id}")
   public ResponseEntity<?> updatePedidoById(@RequestParam Integer id, @RequestBody PedidoRequestDTO pedidoDTO) {
     return pedidoService.updatePedidoById(id, pedidoDTO);
   }
 
+  @SecurityRequirement(name = "Bearer Auth")
+  @PreAuthorize("hasAnyRole('USER', 'MOD')")
   @DeleteMapping("/delete-pedido/{id}")
   public ResponseEntity<String> deletarPedido(@RequestParam Integer id) {
     boolean resultDelete = pedidoService.pedidoDelete(id);

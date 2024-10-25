@@ -34,10 +34,10 @@ public class ClienteService {
 
 	@Autowired
 	EnderecoRepository enderecoRepository;
-	
+
 	@Autowired
 	EmailService emailService;
-	
+
 	public List<ClienteResponseDTO> allClients() {
 		List<ClienteResponseDTO> listaDTO = new ArrayList<ClienteResponseDTO>();
 		for (Cliente cliente : clienteRepo.findAll()) {
@@ -46,8 +46,8 @@ public class ClienteService {
 		}
 		return listaDTO;
 	}
-	
-	public ResponseEntity<?> getClienteById (Integer id) {
+
+	public ResponseEntity<?> getClienteById(Integer id) {
 		if (!clienteRepo.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
@@ -89,7 +89,7 @@ public class ClienteService {
 		return ResponseEntity.ok(new MessageResponseDTO("Cliente cadastrado com sucesso."));
 	}
 
-	public boolean clienteDelete(Integer id) {
+	public boolean deleteClienteById(Integer id) {
 		if (clienteRepo.existsById(id)) {
 			clienteRepo.deleteById(id);
 			return true;
@@ -99,7 +99,7 @@ public class ClienteService {
 		}
 	}
 
-	public ResponseEntity<?> alterarCliente(String cpf, ClientePutRequestDTO clienteDTO) {
+	public ResponseEntity<?> updateClienteById(String cpf, ClientePutRequestDTO clienteDTO) {
 
 		Cliente cliente = clienteRepo.findByCpf(cpf).get();
 

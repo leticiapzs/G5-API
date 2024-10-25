@@ -1,11 +1,14 @@
 package br.com.grupo5.trabalho_final.security.services;
 
 import br.com.grupo5.trabalho_final.security.entities.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.grupo5.trabalho_final.security.dto.UserRequestDTO;
-// import br.com.grupo5.trabalho_final.security.dto.UserRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.UserResponseDTO;
 import br.com.grupo5.trabalho_final.security.repositories.UserRepository;
 
@@ -13,6 +16,16 @@ import br.com.grupo5.trabalho_final.security.repositories.UserRepository;
 public class UserService {
   @Autowired
   private UserRepository userRepository;
+
+  public List<UserResponseDTO> getAllUsers() {
+    List<User> users = userRepository.findAll();
+    List<UserResponseDTO> userResponseDTOs = new ArrayList<>();
+    for (User u : users) {
+      userResponseDTOs.add(new UserResponseDTO(u.getUsername(), u.getEmail(), u.getRoles()));
+    }
+    return userResponseDTOs;
+
+  }
 
   public UserResponseDTO findUserById(Integer id) {
     User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found with id: " + id));

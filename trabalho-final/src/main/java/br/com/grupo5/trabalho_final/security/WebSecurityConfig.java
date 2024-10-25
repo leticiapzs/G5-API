@@ -45,6 +45,11 @@ public class WebSecurityConfig {
 								"/endereco/**", "/adicionando-endereco/**", "/buscando-endereco/{id}/**", "/deletando-endereco/{id}/**",
 								"/pedido/**", "/loja/**", "/cadastro/**", "/categoria/**", "/{id}/foto/**")
 						.permitAll()
+						.requestMatchers("/cupom/**").hasAnyRole("MOD", "ADMIN")
+						.requestMatchers("/endereco/**").hasAnyRole("USER", "MOD", "ADMIN")
+						.requestMatchers("/produto/**").hasAnyRole("USER", "MOD", "ADMIN")
+						.requestMatchers("/pedido/**").hasAnyRole("USER", "MOD", "ADMIN")
+						.requestMatchers("/loja/**").hasAnyRole("USER", "MOD", "ADMIN")
 						.requestMatchers("/user/**").hasAnyRole("USER")
 						.requestMatchers("/test/user/**").hasAnyRole("USER", "ADMIN")
 						.requestMatchers("/test/admin/**").hasRole("ADMIN")

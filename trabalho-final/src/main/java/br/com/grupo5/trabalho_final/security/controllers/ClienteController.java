@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import br.com.grupo5.trabalho_final.security.dto.ClientePutRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.ClienteRequestDTO;
 import br.com.grupo5.trabalho_final.security.dto.ClienteResponseDTO;
 import br.com.grupo5.trabalho_final.security.services.ClienteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/cliente")
@@ -26,12 +28,16 @@ public class ClienteController {
 
 	@Autowired
 	ClienteService clienteService;
-	
+
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping
 	public List<ClienteResponseDTO> getAllClientes() {
 		return clienteService.allClients();
 	}
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER','MOD', 'ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getClienteById(@PathVariable Integer id) {
 		try {
@@ -46,9 +52,11 @@ public class ClienteController {
 		return clienteService.cadastrarCliente(clienteDTO);
 	}
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/deleteId/{id}")
-	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
-		boolean resultDelete = clienteService.clienteDelete(id);
+	public ResponseEntity<String> deleteClienteById(@PathVariable Integer id) {
+		boolean resultDelete = clienteService.deleteClienteById(id);
 		if (resultDelete) {
 			return ResponseEntity.status(HttpStatus.OK).body("Objeto excluído com sucesso.");
 		} else {
@@ -56,8 +64,10 @@ public class ClienteController {
 		}
 	}
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping("/alterar-cliente/")
-	public ResponseEntity<?> alteraLoja(@PathVariable String cpf, @RequestBody ClientePutRequestDTO clientedto) {
-		return clienteService.alterarCliente(cpf, clientedto);
+	public ResponseEntity<?> updateClienteById(@PathVariable String cpf, @RequestBody ClientePutRequestDTO clientedto) {
+		return clienteService.updateClienteById(cpf, clientedto);
 	}
 }

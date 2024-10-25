@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,22 +23,27 @@ import br.com.grupo5.trabalho_final.security.dto.LojaRequestDTO;
 import br.com.grupo5.trabalho_final.security.entities.Loja;
 import br.com.grupo5.trabalho_final.security.services.FotoService;
 import br.com.grupo5.trabalho_final.security.services.LojaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/loja")
 public class LojaController {
 	@Autowired
 	private LojaService lojaService;
-	
+
 	@Autowired
 	FotoService fotoService;
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping
 	public ResponseEntity<?> getAllLojas() {
 		return lojaService.getAllLojas();
 
 	}
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'MOD', 'ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getLojaById(@PathVariable Integer id) {
 		try {
@@ -55,6 +61,8 @@ public class LojaController {
 
 	}
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'MOD', 'ADMIN')")
 	@DeleteMapping("/deleteId/{id}")
 	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
 		boolean resultDelete = lojaService.lojaDelete(id);
@@ -65,13 +73,17 @@ public class LojaController {
 		}
 	}
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasRole('MOD')")
 	@PutMapping("/alterar-loja/")
 	public ResponseEntity<?> alteraLoja(@PathVariable String cnpj, @RequestBody LojaPutRequestDTO lojadto) {
 		return lojaService.alterarLoja(cnpj, lojadto);
 	}
-	
+
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'MOD')")
 	@GetMapping("/{idLoja}/foto")
-	public ResponseEntity<byte[]> retornoDaFoto (@PathVariable Integer idLoja) throws Exception{
+	public ResponseEntity<byte[]> retornoDaFoto(@PathVariable Integer idLoja) throws Exception {
 		byte[] foto = fotoService.getFoto(idLoja);
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(foto);
 	}
