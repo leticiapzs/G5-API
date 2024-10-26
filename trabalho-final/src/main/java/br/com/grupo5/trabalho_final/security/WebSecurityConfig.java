@@ -52,7 +52,7 @@ public class WebSecurityConfig {
 						.requestMatchers("/test/mod/**", "/loja/alterar-loja/{cnpj}", "/product/create/**", "/delete-id/{id}/**")
 						.hasRole("MODERATOR")
 						.requestMatchers("/user/**").hasRole("USER")
-						.requestMatchers("/test/admin/**", "/cliente/all-clientes/**").hasRole("ADMIN")
+						.requestMatchers("/test/admin/**", "/cliente/all-clientes/**", "/categoria/create/**", "/categoria/{id}/**").hasRole("ADMIN")
 						.anyRequest().authenticated());
 		http.authenticationProvider(authenticationProvider());
 
