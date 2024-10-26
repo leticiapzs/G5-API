@@ -25,24 +25,24 @@ public class PedidoController {
 	@Autowired
 	private PedidoService pedidoService;
 
-	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
-	@GetMapping("/lista-pedidos/{idCliente}")
-	public ResponseEntity<?> getAllPedidos(@RequestParam Integer idCliente) {
-		return pedidoService.getAllPedidos(idCliente);
-	}
+	// @SecurityRequirement(name = "Bearer Auth")
+	// @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
+	// @GetMapping("/lista-pedidos/{idCliente}")
+	// public ResponseEntity<?> getAllPedidos(@RequestParam Integer idCliente) {
+	// return pedidoService.getAllPedidos(idCliente);
+	// }
 
-	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
-	@GetMapping("/lista-produtos/{idCliente}")
-	public String listaProduto(@RequestParam Integer idCliente) {
-		return pedidoService.listaProdutos(idCliente);
-	}
+	// @SecurityRequirement(name = "Bearer Auth")
+	// @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
+	// @GetMapping("/lista-produtos/{idCliente}")
+	// public String listaProduto(@RequestParam Integer idCliente) {
+	// return pedidoService.listaProdutos(idCliente);
+	// }
 
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
 	@PostMapping("/novo-pedido")
-	public ResponseEntity<?> novoPedido(PedidoRequestDTO pedidoDTO) {
+	public ResponseEntity<?> novoPedido(@RequestBody PedidoRequestDTO pedidoDTO) {
 		return pedidoService.adicionarProduto(pedidoDTO);
 	}
 

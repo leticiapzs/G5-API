@@ -101,10 +101,16 @@ public class Cliente {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	public ClienteResponseDTO toResponseDTO () {
-		return new ClienteResponseDTO(this.nomeCompleto, this.cpf, this.dataDeNascimento, this.user.getUsername(), this.user.getEmail(), this.fkEndereco);
+
+	public ClienteResponseDTO toResponseDTO() {
+		return new ClienteResponseDTO(this.nomeCompleto, this.cpf, this.dataDeNascimento, this.user.getUsername(),
+				this.user.getEmail(), this.fkEndereco);
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nomeCompleto=" + nomeCompleto + ", cpf=" + cpf + ", fkEndereco=" + fkEndereco
+				+ ", dataDeNascimento=" + dataDeNascimento + ", user=" + user + "]";
 	}
 
 }

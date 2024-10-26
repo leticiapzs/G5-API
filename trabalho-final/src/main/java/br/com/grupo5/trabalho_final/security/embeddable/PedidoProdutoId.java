@@ -8,26 +8,23 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class PedidoProdutoId implements Serializable {
-   
-	private static final long serialVersionUID = 1L;
 
-@Column(name = "produto_id")
+  // private static final long serialVersionUID = 1L;
+
+  @Column(name = "produto_id")
   private Integer produtoId;
 
   @Column(name = "pedido_id")
   private Integer pedidoId;
 
-  // Default constructor
   public PedidoProdutoId() {
   }
 
-  // Parameterized constructor
   public PedidoProdutoId(Integer produtoId, Integer pedidoId) {
     this.produtoId = produtoId;
     this.pedidoId = pedidoId;
   }
 
-  // Getters and setters
   public Integer getProdutoId() {
     return produtoId;
   }
@@ -44,7 +41,6 @@ public class PedidoProdutoId implements Serializable {
     this.pedidoId = pedidoId;
   }
 
-  // Override equals and hashCode
   @Override
   public boolean equals(Object o) {
     if (this == o)
@@ -58,5 +54,10 @@ public class PedidoProdutoId implements Serializable {
   @Override
   public int hashCode() {
     return Objects.hash(produtoId, pedidoId);
+  }
+
+  @Override
+  public String toString() {
+    return "PedidoProdutoId [pedidoId=" + pedidoId + ", produtoId=" + produtoId + "]";
   }
 }

@@ -18,12 +18,12 @@ public class PedidoProduto {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@MapsId("produtoId")
-	@JoinColumn(name = "produto_id", insertable = false, updatable = false)
+	@JoinColumn(name = "produto_id", insertable = true, updatable = false)
 	private Produto produto;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@MapsId("pedidoId")
-	@JoinColumn(name = "pedido_id", insertable = false, updatable = false)
+	@JoinColumn(name = "pedido_id", insertable = true, updatable = false)
 	private Pedido pedido;
 
 	private Integer quantidade;
@@ -34,7 +34,6 @@ public class PedidoProduto {
 		this.quantidade = quantidade;
 	}
 
-// Getters and setters
 	public PedidoProdutoId getId() {
 		return id;
 	}
@@ -65,6 +64,12 @@ public class PedidoProduto {
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	@Override
+	public String toString() {
+		return "PedidoProduto [id=" + id + ", produto=" + produto + ", pedido=" + pedido + ", quantidade=" + quantidade
+				+ "]";
 	}
 
 }

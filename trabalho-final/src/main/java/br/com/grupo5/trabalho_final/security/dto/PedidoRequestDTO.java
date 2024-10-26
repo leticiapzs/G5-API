@@ -5,7 +5,7 @@ public class PedidoRequestDTO {
 	private Integer idProduto;
 
 	private Integer idCliente;
-	
+
 	private Integer quantidade;
 
 	public PedidoRequestDTO() {
@@ -41,6 +41,9 @@ public class PedidoRequestDTO {
 		this.quantidade = quantidade;
 	}
 
-
+	@Override
+	public String toString() {
+		return "PedidoRequestDTO [idProduto=" + idProduto + ", idCliente=" + idCliente + ", quantidade=" + quantidade + "]";
+	}
 
 }
