@@ -2,6 +2,7 @@ package br.com.grupo5.trabalho_final.security.entities;
 
 import java.util.Set;
 
+import br.com.grupo5.trabalho_final.security.dto.ProdutoResponseDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -123,4 +124,9 @@ public class Produto {
     return "Produto [descricao=" + descricao + ", estoque=" + estoque + ", id=" + id + ", nome=" + nome + ", valor="
         + valor + ", categoria=" + fkCategoria + "]";
   }
+  
+  public ProdutoResponseDTO toResponseDTO () {
+	  return new ProdutoResponseDTO(this.nome, this.descricao, this.valor, this.estoque);
+  }
+
 }

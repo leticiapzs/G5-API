@@ -1,7 +1,8 @@
 package br.com.grupo5.trabalho_final.security.services;
 
-import java.util.Optional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,15 +29,19 @@ public class ProdutoService {
 	@Autowired
 	private LojaRepository lojaRepository;
 
-	public List<Produto> getAllProducts() {
-		return produtoRepository.findAll();
+	public List<ProdutoResponseDTO> getAllProducts() {
+		List<ProdutoResponseDTO> lista = new ArrayList<>();
+		for (Produto produto : produtoRepository.findAll()) {
+			lista.add(produto.toResponseDTO());
+		}
+		return lista;
 	}
 
 	public ResponseEntity<?> getProductById(Integer id) {
 		if (!produtoRepository.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(produtoRepository.findById(id).get());
+		return ResponseEntity.ok(produtoRepository.findById(id).get().toResponseDTO());
 	}
 
 	public ResponseEntity<?> createProduct(ProdutoRequestDTO produtoRequestDTO) {

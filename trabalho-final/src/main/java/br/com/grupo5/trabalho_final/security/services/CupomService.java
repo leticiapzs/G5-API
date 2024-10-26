@@ -21,15 +21,6 @@ public class CupomService {
 		return cupom;
 	}
 
-//	public ResponseEntity<?> createCupom(CupomRequestDTO cupomRequestDTO) {
-//		Cupom cupom = new Cupom();
-//
-//		cupom.setCodigo(cupomRequestDTO.getCodigo());
-//		cupom.setBoolean_ativo(cupomRequestDTO.isBoolean_ativo());
-//		cupom.setDesconto(cupomRequestDTO.getDesconto());
-//
-//		return ResponseEntity.ok(cupomRepository.save(cupom));
-//	}
 
 	public void createCupom(CupomRequestDTO cupomRequestDTO) {
 		Cupom cupom = new Cupom();
