@@ -22,47 +22,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/pedido")
 public class PedidoController {
 
-  @Autowired
-  private PedidoService pedidoService;
+	@Autowired
+	private PedidoService pedidoService;
 
-  @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
-  @GetMapping("/lista-pedidos/{id}")
-  public ResponseEntity<?> getAllPedidos(@RequestParam Integer id) {
-    return pedidoService.getAllPedidos(id);
-  }
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
+	@GetMapping("/lista-pedidos/{idCliente}")
+	public ResponseEntity<?> getAllPedidos(@RequestParam Integer idCliente) {
+		return pedidoService.getAllPedidos(idCliente);
+	}
 
-  @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
-  @GetMapping("/lista-produtos/{id}")
-  public String listaProduto(@RequestParam Integer id) {
-    return pedidoService.listaProdutos(id);
-  }
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
+	@GetMapping("/lista-produtos/{idCliente}")
+	public String listaProduto(@RequestParam Integer idCliente) {
+		return pedidoService.listaProdutos(idCliente);
+	}
 
-  @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
-  @PostMapping("/novo-pedido")
-  public ResponseEntity<?> novoPedido(PedidoRequestDTO pedidoDTO) {
-    return pedidoService.adicionarProduto(pedidoDTO);
-  }
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
+	@PostMapping("/novo-pedido")
+	public ResponseEntity<?> novoPedido(PedidoRequestDTO pedidoDTO) {
+		return pedidoService.adicionarProduto(pedidoDTO);
+	}
 
-  @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
-  @PutMapping("/update-pedido/{id}")
-  public ResponseEntity<?> updatePedidoById(@RequestParam Integer id, @RequestBody PedidoRequestDTO pedidoDTO) {
-    return pedidoService.updatePedidoById(id, pedidoDTO);
-  }
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
+	@PutMapping("/update-pedido/{id}")
+	public ResponseEntity<?> updatePedidoById(@RequestParam Integer id, @RequestBody PedidoRequestDTO pedidoDTO) {
+		return pedidoService.updatePedidoById(id, pedidoDTO);
+	}
 
-  @SecurityRequirement(name = "Bearer Auth")
-  @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
-  @DeleteMapping("/delete-pedido/{id}")
-  public ResponseEntity<String> deletarPedido(@RequestParam Integer id) {
-    boolean resultDelete = pedidoService.pedidoDelete(id);
-    if (resultDelete) {
-      return ResponseEntity.status(HttpStatus.OK).body("Pedido excluído com sucesso.");
-    } else {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao excluir pedido.");
-    }
-  }
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
+	@DeleteMapping("/delete-pedido/{id}")
+	public ResponseEntity<String> deletarPedido(@RequestParam Integer id) {
+		boolean resultDelete = pedidoService.pedidoDelete(id);
+		if (resultDelete) {
+			return ResponseEntity.status(HttpStatus.OK).body("Pedido excluído com sucesso.");
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao excluir pedido.");
+		}
+	}
 
 }

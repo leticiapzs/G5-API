@@ -25,7 +25,7 @@ public class PedidoService {
 
 	@Autowired
 	ProdutoRepository produtoRepo;
-	
+
 	@Autowired
 	ClienteRepository clienteRepo;
 
@@ -53,22 +53,21 @@ public class PedidoService {
 	}
 
 	public ResponseEntity<?> adicionarProduto(PedidoRequestDTO pedidoDTO) {
-		Pedido pedidoExistente = pedidoRepo.ultimoPedido(pedidoDTO.getIdCliente());
-		if (!pedidoExistente.isAtivo() || pedidoExistente == null) {
+
+		if (!verificarUltimoPedido(pedidoDTO.getIdCliente())) {
 			Pedido pedido = new Pedido(clienteRepo.findById(pedidoDTO.getIdCliente()).get());
 			Produto produto = produtoRepo.findById(pedidoDTO.getIdProduto()).get();
 			PedidoProduto pedidoProduto = new PedidoProduto(pedido, produto, pedidoDTO.getQuantidade());
 			pedido.getPedidoProdutos().add(pedidoProduto);
-			pedido.setValorTotal(precoPedido(clienteRepo.findById(pedidoDTO.getIdCliente()).get()));
 			produto.setEstoque(produto.getEstoque() - pedidoDTO.getQuantidade());
 			produtoRepo.save(produto);
 			pedidoRepo.save(pedido);
 			return ResponseEntity.ok(pedido);
 		} else {
+			Pedido pedidoExistente = pedidoRepo.ultimoPedido(pedidoDTO.getIdCliente());
 			Produto produto = produtoRepo.findById(pedidoDTO.getIdProduto()).get();
 			PedidoProduto pedidoProduto = new PedidoProduto(pedidoExistente, produto, pedidoDTO.getQuantidade());
 			pedidoExistente.getPedidoProdutos().add(pedidoProduto);
-			pedidoExistente.setValorTotal(precoPedido(clienteRepo.findById(pedidoDTO.getIdCliente()).get()));
 			produto.setEstoque(produto.getEstoque() - pedidoDTO.getQuantidade());
 			produtoRepo.save(produto);
 			pedidoRepo.save(pedidoExistente);
@@ -79,7 +78,8 @@ public class PedidoService {
 	public ResponseEntity<?> updatePedidoById(Integer id, PedidoRequestDTO pedidoDTO) {
 		Pedido pedido = pedidoRepo.findById(id).get();
 		if (pedido != null) {
-			PedidoProduto pedidoProduto = new PedidoProduto(pedido, produtoRepo.findById(pedidoDTO.getIdProduto()).get(), pedidoDTO.getQuantidade());
+			PedidoProduto pedidoProduto = new PedidoProduto(pedido,
+					produtoRepo.findById(pedidoDTO.getIdProduto()).get(), pedidoDTO.getQuantidade());
 			pedido.getPedidoProdutos().add(pedidoProduto);
 			pedido.setValorTotal(precoPedido(pedido.getCliente()));
 			pedidoRepo.save(pedido);
@@ -100,6 +100,10 @@ public class PedidoService {
 
 	public ResponseEntity<?> getAllPedidos(Integer idCliente) {
 		return ResponseEntity.ok(pedidoRepo.listaPedidos(idCliente));
+	}
+
+	private boolean verificarUltimoPedido(Integer idCliente) {
+		return pedidoRepo.existePedido(idCliente);
 	}
 
 }

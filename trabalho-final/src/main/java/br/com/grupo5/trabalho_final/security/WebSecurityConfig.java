@@ -44,7 +44,8 @@ public class WebSecurityConfig {
 								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**",
 								"/cliente/cadastro/**", "/loja/cadastro/**", "/loja/all-lojas**", "/produto/all/**", "/categoria/**")
 						.permitAll()
-						.requestMatchers("/loja/{id}/**", "/cliente/{id}/**", "/pedido/**")
+						.requestMatchers("/loja/{id}/**", "/cliente/{id}/**", "/pedido/**", "/pedido/novo-pedido/**", "/pedido/update-pedido/{id}/**",
+								"/pedido/delete-pedido/{id}/**", "pedido/lista-produtos/{idCliente}/**", "/pedido/lista-pedidos/{idCliente}/**")
 						.hasAnyRole("USER", "MODERATOR", "ADMIN")
 						.requestMatchers("/loja/delete-id/{id}/**", "/cupom/**").hasAnyRole("MODERATOR", "ADMIN")
 						.requestMatchers("/cliente/delete-id/{id}", "/alterar-cliente/{cpf}").hasAnyRole("USER", "ADMIN")

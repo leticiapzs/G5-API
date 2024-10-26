@@ -1,13 +1,17 @@
 package br.com.grupo5.trabalho_final.security.embeddable;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Column;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
 @Embeddable
 public class PedidoProdutoId implements Serializable {
-  @Column(name = "produto_id")
+   
+	private static final long serialVersionUID = 1L;
+
+@Column(name = "produto_id")
   private Integer produtoId;
 
   @Column(name = "pedido_id")
