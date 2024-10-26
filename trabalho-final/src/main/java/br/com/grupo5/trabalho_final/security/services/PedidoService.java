@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.grupo5.trabalho_final.security.dto.PedidoRequestDTO;
+import br.com.grupo5.trabalho_final.security.embeddable.PedidoProdutoId;
 import br.com.grupo5.trabalho_final.security.entities.Cliente;
 import br.com.grupo5.trabalho_final.security.entities.Pedido;
 import br.com.grupo5.trabalho_final.security.entities.PedidoProduto;
@@ -53,24 +54,28 @@ public class PedidoService {
 	}
 
 	public ResponseEntity<?> adicionarProduto(PedidoRequestDTO pedidoDTO) {
-
-		if (!verificarUltimoPedido(pedidoDTO.getIdCliente())) {
+		
+		if (!verificarUltimoPedido(pedidoDTO.getIdCliente()) || !pedidoRepo.ultimoPedido(pedidoDTO.getIdCliente()).isAtivo()) {
 			Pedido pedido = new Pedido(clienteRepo.findById(pedidoDTO.getIdCliente()).get());
 			Produto produto = produtoRepo.findById(pedidoDTO.getIdProduto()).get();
 			PedidoProduto pedidoProduto = new PedidoProduto(pedido, produto, pedidoDTO.getQuantidade());
-			pedido.getPedidoProdutos().add(pedidoProduto);
 			produto.setEstoque(produto.getEstoque() - pedidoDTO.getQuantidade());
 			produtoRepo.save(produto);
 			pedidoRepo.save(pedido);
+			pedidoProduto.setId(new PedidoProdutoId(pedido.getId(), produto.getId()));
+			pedido.getPedidoProdutos().add(pedidoProduto);
+			ppRepo.save(pedidoProduto);
 			return ResponseEntity.ok(pedido);
 		} else {
 			Pedido pedidoExistente = pedidoRepo.ultimoPedido(pedidoDTO.getIdCliente());
 			Produto produto = produtoRepo.findById(pedidoDTO.getIdProduto()).get();
 			PedidoProduto pedidoProduto = new PedidoProduto(pedidoExistente, produto, pedidoDTO.getQuantidade());
-			pedidoExistente.getPedidoProdutos().add(pedidoProduto);
 			produto.setEstoque(produto.getEstoque() - pedidoDTO.getQuantidade());
 			produtoRepo.save(produto);
 			pedidoRepo.save(pedidoExistente);
+			pedidoProduto.setId(new PedidoProdutoId(pedidoExistente.getId(), produto.getId()));
+			pedidoExistente.getPedidoProdutos().add(pedidoProduto);
+			ppRepo.save(pedidoProduto);
 			return ResponseEntity.ok(pedidoExistente);
 		}
 	}
