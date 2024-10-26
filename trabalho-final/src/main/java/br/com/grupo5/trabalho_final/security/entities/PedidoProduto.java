@@ -28,11 +28,15 @@ public class PedidoProduto {
 
 	private Integer quantidade;
 
+	public PedidoProduto() {
+	}
+
 	public PedidoProduto(Pedido pedido, Produto produto, Integer quantidade) {
+		this.id = new PedidoProdutoId(pedido.getId(), produto.getId());
 		this.pedido = pedido;
 		this.produto = produto;
 		this.quantidade = quantidade;
-	}
+}
 
 	public PedidoProdutoId getId() {
 		return id;

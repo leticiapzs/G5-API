@@ -13,8 +13,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "produto")
@@ -24,19 +22,15 @@ public class Produto {
   @Column(name = "prod_cd_id")
   private Integer id;
 
-  @NotBlank
   @Column(name = "prod_tx_nome")
   private String nome;
 
-  @NotBlank
   @Column(name = "prod_tx_descricao")
   private String descricao;
 
-  @NotNull
   @Column(name = "prod_int_valor")
   private Double valor;
 
-  @NotNull
   @Column(name = "prod_int_estoque")
   private Integer estoque;
 
@@ -124,9 +118,9 @@ public class Produto {
     return "Produto [descricao=" + descricao + ", estoque=" + estoque + ", id=" + id + ", nome=" + nome + ", valor="
         + valor + ", categoria=" + fkCategoria + "]";
   }
-  
-  public ProdutoResponseDTO toResponseDTO () {
-	  return new ProdutoResponseDTO(this.nome, this.descricao, this.valor, this.estoque);
+
+  public ProdutoResponseDTO toResponseDTO() {
+    return new ProdutoResponseDTO(this.nome, this.descricao, this.valor, this.estoque);
   }
 
 }

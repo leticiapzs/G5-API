@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,12 +26,12 @@ public class PedidoController {
 	@Autowired
 	private PedidoService pedidoService;
 
-	// @SecurityRequirement(name = "Bearer Auth")
-	// @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
-	// @GetMapping("/lista-pedidos/{idCliente}")
-	// public ResponseEntity<?> getAllPedidos(@RequestParam Integer idCliente) {
-	// return pedidoService.getAllPedidos(idCliente);
-	// }
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
+	@GetMapping("/lista-pedidos/{idCliente}")
+	public ResponseEntity<?> getAllPedidosByClienteId(@PathVariable Integer idCliente) {
+		return pedidoService.getAllPedidosByClienteId(idCliente);
+	}
 
 	// @SecurityRequirement(name = "Bearer Auth")
 	// @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")

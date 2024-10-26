@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,21 +26,21 @@ public class Pedido {
 	@Column(name = "ped_cd_id")
 	private Integer id;
 
-	@Column(name = "date")
-	private Date date;
-
-	@Column(name = "ped_int_valortotal")
-	private Double valorTotal;
-
-	@OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY)
-	private Set<PedidoProduto> pedidoProdutos;
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	private Set<PedidoProduto> pedidoProdutos = new HashSet<>();
+
+	@Column(name = "ped_int_valortotal")
+	private Double valorTotal;
+
 	@Column(name = "ped_bool_ativo")
 	private boolean ativo;
+
+	@Column(name = "date")
+	private Date date;
 
 	public Pedido() {
 	}

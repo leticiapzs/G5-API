@@ -1,6 +1,8 @@
 package br.com.grupo5.trabalho_final.security.services;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,34 +35,6 @@ public class PedidoService {
     @Autowired
     ClienteRepository clienteRepo;
 
-    // @Autowired
-    // PedidoProdutoIdRepository ppIdRepo;
-
-    // public String listaProdutos(Integer idCliente) {
-    // String listaDeProdutos = "";
-    // Pedido pedido = pedidoRepo.ultimoPedido(idCliente);
-    // for (PedidoProduto produtoPed : pedido.getPedidoProdutos()) {
-    // Integer quantidade = produtoPed.getQuantidade();
-    // Double preco = produtoPed.getProduto().getValor();
-    // listaDeProdutos += produtoPed.getProduto().getNome() + " x " + quantidade + "
-    // - R$ " + (quantidade * preco)
-    // + "\r\n";
-    // }
-    // return listaDeProdutos + "\r\n\nR$ " + precoPedido(pedido.getCliente());
-    // }
-
-    // public Double precoPedido(Cliente cliente) {
-    // Double valorTotal = 0.0;
-    // Pedido pedido = pedidoRepo.ultimoPedido(cliente.getId
-
-    // for (PedidoProduto produtoPed : pedido.getPedidoProdutos()) {
-    // Integer quantidade = produtoPed.getQuantidade();
-    // Double preco = produtoPed.getProduto().getValor();
-    // valorTotal += quantidade * preco;
-    // }
-    // return valorTotal;
-    // }
-
     public ResponseEntity<?> adicionarProduto(PedidoRequestDTO pedidoDTO) {
         Optional<Cliente> optionalCliente = clienteRepo.findById(pedidoDTO.getIdCliente());
         if (optionalCliente.isPresent()) {
@@ -73,12 +47,9 @@ public class PedidoService {
             produto.setEstoque(produto.getEstoque() - pedidoDTO.getQuantidade());
             produtoRepo.save(produto);
             pedidoRepo.save(pedido);
-            System.out.println("LOGGY " + pedido.toString());
 
             PedidoProdutoId pedidoProdutoId = new PedidoProdutoId(produto.getId(), pedido.getId());
             pedidoProduto.setId(pedidoProdutoId);
-            System.out.println("LOGGY " + pedidoProdutoId.toString());
-            System.out.println("LOGGY " + pedidoProduto.toString());
 
             ppRepo.save(pedidoProduto);
 
@@ -120,12 +91,13 @@ public class PedidoService {
         return false;
     }
 
-    // public ResponseEntity<?> getAllPedidos(Integer idCliente) {
-    // return ResponseEntity.ok(pedidoRepo.listaPedidos(idCliente));
-    // }
+    public ResponseEntity<?> getAllPedidosByClienteId(Integer idCliente) {
+        List<Pedido> pedidos = pedidoRepo.listaPedidos(idCliente);
+        List<PedidoResponseDTO> pedidoDTOs = pedidos.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return ResponseEntity.ok(pedidoDTOs);
+    }
 
-    // private boolean verificarUltimoPedido(Integer idCliente) {
-    // return pedidoRepo.existePedido(idCliente);
-    // }
-
+    private PedidoResponseDTO convertToDTO(Pedido pedido) {
+        return new PedidoResponseDTO(pedido.getValorTotal(), pedido.getCliente().getId(), pedido.isAtivo());
+    }
 }
