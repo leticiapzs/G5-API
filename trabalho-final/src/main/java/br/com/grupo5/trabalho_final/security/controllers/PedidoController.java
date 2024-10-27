@@ -33,13 +33,6 @@ public class PedidoController {
 		return pedidoService.getAllPedidosByClienteId(idCliente);
 	}
 
-	// @SecurityRequirement(name = "Bearer Auth")
-	// @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
-	// @GetMapping("/lista-produtos/{idCliente}")
-	// public String listaProduto(@RequestParam Integer idCliente) {
-	// return pedidoService.listaProdutos(idCliente);
-	// }
-
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
 	@PostMapping("/novo-pedido")

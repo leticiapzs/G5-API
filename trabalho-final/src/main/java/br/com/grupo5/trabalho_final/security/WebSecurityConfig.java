@@ -49,7 +49,7 @@ public class WebSecurityConfig {
 						.hasAnyRole("USER", "MODERATOR", "ADMIN")
 						.requestMatchers("/loja/delete-id/{id}/**", "/cupom/**").hasAnyRole("MODERATOR", "ADMIN")
 						.requestMatchers("/cliente/delete-id/{id}", "/alterar-cliente/{cpf}").hasAnyRole("USER", "ADMIN")
-						.requestMatchers("/produto/{id}/**", "/user/**").hasAnyRole("USER", "MODERATOR")
+						.requestMatchers("/produto/{id}/**", "/user/**", "/cupom/adicionando-cupom/**", "/listando-cupom/**", "/deletando-cupom/{id}/**", "/atualizando-cupom/{id}/**").hasAnyRole("USER", "MODERATOR")
 						.requestMatchers("/test/mod/**", "/loja/alterar-loja/{cnpj}", "/product/create/**", "/delete-id/{id}/**")
 						.hasRole("MODERATOR")
 						.requestMatchers("/user/**").hasRole("USER")
